@@ -1,0 +1,77 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}
+	Gérer les réservations
+{% endblock %}
+
+{% block body %}
+	<h1>Gérer les réservations</h1>
+	<div class="row">
+		<div class="col-lg-12">
+			<section class="panel">
+				<header class="panel-heading">
+					<div>
+						<!--  search form start -->
+
+
+						<form class="navbar-form">
+							<input
+							class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+
+
+						<!--  search form end -->
+						</div>
+				</header>
+				<table class="table table-striped table-advance table-hover">
+					<thead>
+						<tr>
+
+							<th>Date</th>
+							<th>Heuredebut</th>
+							<th>Heurefin</th>
+							<th>Client</th>
+							<th>Terrain</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody id="hi">
+						{% for reservation in reservations %}
+							<tr>
+
+								<td>{{ reservation.date ? reservation.date|date('Y-m-d') : '' }}</td>
+								<td>{{ reservation.heuredebut ? reservation.heuredebut|date('H:i:s') : '' }}</td>
+								<td>{{ reservation.heurefin ? reservation.heurefin|date('H:i:s') : '' }}</td>
+								<td>{{ reservation.idClient }}</td>
+								<td>{{ reservation.idTerrain }}</td>
+								<td>
+									<a class="btn btn-primary" href="{{ path('reservation_show', {'idres': reservation.idres}) }}">Afficher</a>
+									 <a class="btn btn-warning"href="{{ path('reservation_delete', {'idres': reservation.idres}) }}">Supprimer</a>
+									<a class="btn btn-success" href="{{ path('reservation_new') }}">Valider</a>
+								</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td colspan="5">no records found</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+
+			</section>
+		</div>
+	</div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<script>
+			$(document).ready(function () {
+			$("#myInput").on("keyup", function () {
+			var value = $(this).val().toLowerCase();
+			    $("#hi tr").filter(function () {
+			        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			        });
+			    });
+			});
+		</script>
+{% endblock %}

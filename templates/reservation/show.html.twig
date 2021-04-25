@@ -1,0 +1,34 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Reservation{% endblock %}
+
+{% block body %}
+    <h1>Réservation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Idres</th>
+                <td>{{ reservation.idres }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ reservation.date ? reservation.date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Heuredebut</th>
+                <td>{{ reservation.heuredebut ? reservation.heuredebut|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Heurefin</th>
+                <td>{{ reservation.heurefin ? reservation.heurefin|date('H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('reservation_index') }}" class="btn btn-primary">Retour</a>
+
+    <a href="{{ path('reservation_edit', {'idres': reservation.idres}) }}" class="btn btn-success">Modifier</a>
+
+    {{ include('reservation/_delete_form.html.twig') }}
+{% endblock %}

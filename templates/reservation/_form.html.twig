@@ -1,0 +1,18 @@
+
+
+{{form_start(form,{'attr':{'class':'form-horizontal' , 'novalidate': 'novalidate'}})}}
+<table ALIGN="Center" >
+
+    <tr><td>  <h2 >Réserver votre terrain </h2></td></tr>
+    <tr><td>{{ form_row(form.date ,{'label':'Date','attr': {'class': 'form-control'}}) }}</td></tr>
+    <tr><td>{{ form_row(form.heuredebut ,{'label':'Heure de debut' ,'attr': {'class': 'form-control'}}) }}</td></tr>
+    <tr><td>{{ form_row(form.heurefin ,{'label':'Heure de fin','attr': {'class': 'form-control'}}) }}</td></tr>
+    <tr><td>{{ form_row(form.idterrain ,{'label':'Nom du terrain','attr': {'class': 'form-control'}}) }}</td></tr>
+
+    <tr><td> <button class="btn btn-light btn-radius btn-brd grd1" >{{ button_label|default('Réserver') }}</button></td></tr>
+    <tr><td hidden>{{ form_row(form.idclient ,) }}</td></tr>
+</table>
+{{ form_end(form) }}
+
+
+

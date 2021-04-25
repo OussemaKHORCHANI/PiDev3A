@@ -1,0 +1,41 @@
+
+{% block body %}
+    <h1 align ="center">Liste des terrains</h1><hr>
+
+
+    <table class="table table-striped table-bordered" >
+        <thead>
+        <tr>
+            <th class="wd-15p">
+
+                Nomterrain</th>
+            <th class="wd-15p">
+
+                Etat</th>
+            <th class="wd-15p">
+
+                Description</th>
+            <th class="wd-15p">
+
+                Adresse</th>
+            <th class="wd-15p">
+
+                Photo</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for terrain in terrains %}
+        <tr>
+            <td>{{ terrain.nomterrain }}</td>
+            <td>{{ terrain.etat }}</td>
+            <td>{{ terrain.description }}</td>
+            <td>{{ terrain.adresse }}</td>
+            <td>{{ terrain.photo }}</td>
+            <td>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
