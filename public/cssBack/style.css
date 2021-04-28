@@ -140,7 +140,7 @@ table tr th { color: #688a7e;}
 
 .login-img-body{
 
-  background: url('../img/bg-1.jpg') no-repeat center center fixed;
+  background: url('../imgBack/bg-1.jpg') no-repeat center center fixed;
 
   -webkit-background-size: cover;
 
@@ -154,7 +154,7 @@ table tr th { color: #688a7e;}
 
 .login-img2-body{
 
-  background: url('../img/bg-1.jpg') no-repeat center center fixed;
+  background: url('../imgBack/bg-1.jpg') no-repeat center center fixed;
 
   -webkit-background-size: cover;
 
@@ -168,7 +168,7 @@ table tr th { color: #688a7e;}
 
 .login-img3-body{
 
-  background: url('../img/bg-1.jpg') no-repeat center center fixed;
+  background: url('../imgBack/bg-1.jpg') no-repeat center center fixed;
 
   -webkit-background-size: cover;
 
@@ -1230,7 +1230,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 
     height: 30px;
 
-    background: white url('../img/icons/search-line-icon.png') no-repeat 3px;
+    background: white url('../imgBack/icons/search-line-icon.png') no-repeat 3px;
 
     padding-left: 24px;
 
@@ -1248,7 +1248,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.176) !important;
 
-    };
+    }
 
 }
 
@@ -1718,7 +1718,7 @@ div[data-role="editor-toolbar"] {
 
 .log-arrow-up {
 
-    background: url("../img/arrow-up.png") no-repeat;
+    background: url("../imgBack/arrow-up.png") no-repeat;
 
     width: 20px;
 
@@ -2390,7 +2390,6 @@ div[data-role="editor-toolbar"] {
 
 }
 
-}
 
 .panel.panel-default.panel-heading {
 
@@ -3004,7 +3003,7 @@ div[data-role="editor-toolbar"] {
 
 }
 
-* /Widget-Content */
+Widget-Content
 
 
 
@@ -3360,7 +3359,7 @@ div[data-role="editor-toolbar"] {
 
 /*-----	map-----*/
 
-* Google maps */
+ Google maps
 
 
 
@@ -3528,7 +3527,7 @@ div[data-role="editor-toolbar"] {
 
     box-shadow: none;
 
-    background: url("../img/search-icon.jpg") no-repeat 10px 8px;
+    background: url("../imgBack/search-icon.jpg") no-repeat 10px 8px;
 
     padding:0 5px 0 35px;
 
@@ -3670,7 +3669,7 @@ div[data-role="editor-toolbar"] {
 
     font-weight: 300;
 
-    font-weight: 30px;
+
 
 }
 
@@ -3750,7 +3749,7 @@ div[data-role="editor-toolbar"] {
 
 .panel-body.chart-texture {
 
-    background: url("../img/chart-texture.jpg");
+    background: url("../imgBack/chart-texture.jpg");
 
     -webkit-border-radius: 4px 4px 0px 0px;
 
@@ -4152,7 +4151,7 @@ div[data-role="editor-toolbar"] {
 
         margin-bottom: -4px;
 
-    };
+    }
 
     }
 
@@ -4432,7 +4431,7 @@ ul.ft-link li a i {
 
     text-indent: -9999px;
 
-    background: url("../img/left-arrow.png") no-repeat;
+    background: url("../imgBack/left-arrow.png") no-repeat;
 
     width: 6px;
 
@@ -4448,7 +4447,7 @@ ul.ft-link li a i {
 
     text-indent: -9999px;
 
-    background: url("../img/right-arrow.png") no-repeat;
+    background: url("../imgBack/right-arrow.png") no-repeat;
 
     width: 6px;
 
@@ -4862,7 +4861,7 @@ ul.ft-link li a i {
 
 .profile-widget-img{
 
-    background: url('../img/backgrounds/bg-11-small.jpg') no-repeat !important;
+    background: url('../imgBack/backgrounds/bg-11-small.jpg') no-repeat !important;
 
 }
 
@@ -5536,7 +5535,7 @@ ul.ft-link li a i {
 
 .weather-bg-img {
 
-    background: url(../img/backgrounds/bg-14-small.jpg) no-repeat center center;
+    background: url(../imgBack/backgrounds/bg-14-small.jpg) no-repeat center center;
 
     color: #fff;
 
@@ -8312,9 +8311,9 @@ table.sliders tr td {
 
     width: 80px;
 
-    -webkit-mask: url('../img/mask.png') 0 0 no-repeat;
+    -webkit-mask: url('../imgBack/mask.png') 0 0 no-repeat;
 
-    mask: url('../img/mask.png') 0 0 no-repeat;
+    mask: url('../imgBack/mask.png') 0 0 no-repeat;
 
     -webkit-user-select: none;
 
@@ -8526,9 +8525,9 @@ table.sliders tr td {
 
     -webkit-border-radius: 6px;
 
-    -webkit-mask: url('../img/mask.png') 0 0 no-repeat;
+    -webkit-mask: url('../imgBack/mask.png') 0 0 no-repeat;
 
-    mask: url('../img/mask.png') 0 0 no-repeat;
+    mask: url('../imgBack/mask.png') 0 0 no-repeat;
 
 }
 

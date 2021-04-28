@@ -17,8 +17,13 @@
 <meta name="author" content="">
 
 <!-- Site Icons -->
+<link href="{{asset('cssBack/elegant-icons-style.css')}}" rel="stylesheet" />
+
 <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}" type="image/x-icon" />
 <link rel="apple-touch-icon" href="{{asset('images/apple-touch-icon.png')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
 
 </head>
 <body class="host_version">
@@ -28,7 +33,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header tit-up">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times</button>
                     <h4 class="modal-title">Se connecter</h4>
                 </div>
                 <div class="modal-body customer-box">
@@ -100,7 +105,7 @@
         </div>
     </div>
 {% endblock %}
-{#{% block loader %}
+{% block loader %}
     <!-- LOADER -->
     <div id="preloader">
         <div class="loader-container">
@@ -110,7 +115,7 @@
         </div>
     </div>
     <!-- END LOADER -->
-{% endblock %}#}
+{% endblock %}
 {% block header %}
     <!-- Start header -->
     <header class="top-navbar">
@@ -126,22 +131,15 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbars-host">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a class="nav-link" href="{{asset('index.html')}}">Acceuil</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{asset('/reservation/new')}}">Réserver un terrain</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{asset('features.html')}}">Features </a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Hosting </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown-a">
-                                <a class="dropdown-item" href="{{asset('hosting.html')}}">Web Hosting </a>
-                                <a class="dropdown-item" href="{{asset('hosting.html')}}">WordPress Hosting </a>
-                                <a class="dropdown-item" href="{{asset('hosting.html')}}">Cloud Server </a>
-                                <a class="dropdown-item" href="{{asset('hosting.html')}}">Reseller Package </a>
-                                <a class="dropdown-item" href="{{asset('hosting.html')}}">Dedicated Hosting </a>
-                            </div>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="{{asset('domain.html')}}">Domain</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{asset('pricing.html')}}">Pricing</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{asset('contact.html')}}">Contact</a></li>
+
+                        <li class="nav-item "><a class="nav-link" href="{{asset('index.html')}}">Terrain</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{asset('features.html')}}">Making Match </a></li>
+
+                        <li class="nav-item active"><a class="nav-link" href="{{asset('domain.html')}}">Store</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{asset('pricing.html')}}">Event</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{asset('contact.html')}}">Club</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{asset('about.html')}}">Compte</a></li>
+
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a class="hover-btn-new log" href="#" data-toggle="modal" data-target="#login"><span>Se connecter</span></a></li>
@@ -152,88 +150,20 @@
     </header>
     <!-- End header -->
 {% endblock %}
+
+
+
 <br>
 {% block body %}
-    <div id="carouselExampleControls" class="carousel slide bs-slider box-slider" data-ride="carousel" data-pause="hover" data-interval="false" >
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleControls" data-slide-to="1"></li>
-            <li data-target="#carouselExampleControls" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner" role="listbox">
-            <div class="carousel-item active">
-                <div id="home" class="first-section" style="background-image:url('//images/slider-01.jpg');">
-                    <div class="dtab">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 text-right">
-                                    <div class="big-tagline">
-                                        <h2><strong>Shared Hosting</strong> Company</h2>
-                                        <p class="lead">With Landigoo responsive landing page template, you can promote your all hosting, domain and email services. </p>
-                                        <a href="#" class="hover-btn-new"><span>Contact Us</span></a>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a href="#" class="hover-btn-new"><span>Read More</span></a>
-                                    </div>
-                                </div>
-                            </div><!-- end row -->
-                        </div><!-- end container -->
-                    </div>
-                </div><!-- end section -->
-            </div>
-            <div class="carousel-item">
-                <div id="home" class="first-section" style="background-image:url('//images/slider-02.jpg');">
-                    <div class="dtab">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 text-left">
-                                    <div class="big-tagline">
-                                        <h2 data-animation="animated zoomInRight">Find the right <strong>Hosting</strong></h2>
-                                        <p class="lead" data-animation="animated fadeInLeft">With Landigoo responsive landing page template, you can promote your all hosting, domain and email services. </p>
-                                        <a href="#" class="hover-btn-new"><span>Contact Us</span></a>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a href="#" class="hover-btn-new"><span>Read More</span></a>
-                                    </div>
-                                </div>
-                            </div><!-- end row -->
-                        </div><!-- end container -->
-                    </div>
-                </div><!-- end section -->
-            </div>
-            <div class="carousel-item">
-                <div id="home" class="first-section" style="background-image:url('//images/slider-03.jpg');">
-                    <div class="dtab">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 text-center">
-                                    <div class="big-tagline">
-                                        <h2 data-animation="animated zoomInRight"><strong>VPS Servers</strong> Company</h2>
-                                        <p class="lead" data-animation="animated fadeInLeft">1 IP included with each server
-                                            Your Choice of any OS (CentOS, Windows, Debian, Fedora)
-                                            FREE Reboots</p>
-                                        <a href="#" class="hover-btn-new"><span>Contact Us</span></a>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a href="#" class="hover-btn-new"><span>Read More</span></a>
-                                    </div>
-                                </div>
-                            </div><!-- end row -->
-                        </div><!-- end container -->
-                    </div>
-                </div><!-- end section -->
-            </div>
-            <!-- Left Control -->
-            <a class="new-effect carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="fa fa-angle-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
+    {% block listdetail%}
+    {% endblock %}
+{% block formullistdetail %}
+{% endblock %}
+{% block descarticle %}
+{% endblock %}
 
-            <!-- Right Control -->
-            <a class="new-effect carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="fa fa-angle-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-    </div>
+    {% block listarticle %}
+    {% endblock %}
 {% endblock%}
 <br><br>
 {% block footer %}
@@ -290,13 +220,16 @@
         <div class="container">
             <div class="footer-distributed">
                 <div class="footer-left">
-                    <p class="footer-company-name">All Rights Reserved. &copy; 2018 <a href="#">SurTerrain</a> Design By : <a href="https://html.design/">The Leaders</a></p>
+                    <p class="footer-company-name">All Rights Reserved. &copy; 2018 <a href="#">QuickCloud</a> Design By : <a href="https://html.design/">html design</a></p>
                 </div>
 
                 <div class="footer-right">
                     <ul class="footer-links-soi">
-                        <li><a href="https://www.facebook.com/SurTerrain-109384481192695"><i class="fa fa-facebook"></i></a></li>
-
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-github"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
                     </ul><!-- end links -->
                 </div>
             </div>
@@ -306,6 +239,8 @@
 
 <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
 {% block JS %}
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
     <!-- ALL JS FILES -->
     <script src="{{asset('js/all.js')}}"></script>
     <!-- ALL PLUGINS -->
@@ -319,19 +254,31 @@
             visibleItems: 4
         });
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+    <script>
+
+
+        $(function () {
+            $(".rateyo").rateYo().on("rateyo.change", function (e, data) {
+                var rating = data.rating;
+                $(this).parent().find('.score').text('score :'+ $(this).attr('data-rateyo-score'));
+                $(this).parent().find('.result').text('rating :'+ rating);
+                $(this).parent().find('input[name=rating]').val(rating); //add rating value to input field
+            });
+        });
+
+    </script>
     <!-- Modernizer for Portfolio -->
     <script src="{{asset('js/modernizer.js')}}"></script>
+
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <!-- Flashy depends on jQuery -->
-    <script src="//code.jquery.com/jquery.js"></script>
-    <!-- Load Flashy default JavaScript -->
-    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+
 {% endblock %}
-<!-- Include Flashy default partial -->
 {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+
 </body>
 {% block CSS %}
     <!-- Bootstrap CSS -->
@@ -344,8 +291,6 @@
     <link href="{{ asset ('css/responsive.css') }}" rel="stylesheet" >
     <!-- Custom CSS -->
     <link  href="{{ asset ('css/custom.css') }}" rel="stylesheet">
-
-    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
 {% endblock %}
 
 </html>

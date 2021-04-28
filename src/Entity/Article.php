@@ -7,7 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Article
  *
- * @ORM\Table(name="article")
+ *
+ *@ORM\Table(name="article", indexes={@ORM\Index(name="idcat", columns={"idcat"}), @ORM\Index(name="id_article", columns={"id_article"})})
+ * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  * @ORM\Entity
  */
 class Article
@@ -19,7 +21,7 @@ class Article
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idArticle;
+    public $id_article;
 
     /**
      * @var string
@@ -29,23 +31,23 @@ class Article
     private $libelle;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="categorie", type="string", length=30, nullable=false)
+     * @ORM\Column(name="categorie", type="string", length=30, nullable=true)
      */
     private $categorie;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="image_article", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="image_article", type="text", length=65535, nullable=true)
      */
     private $imageArticle;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="prix", type="integer", nullable=false)
+     * @ORM\Column(name="prix", type="integer", nullable=true)
      */
     private $prix;
 
@@ -63,9 +65,26 @@ class Article
      */
     private $ref;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="rate", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $rate;
+
+    /**
+     * @var \Categoriearticle
+     *
+     * @ORM\ManyToOne(targetEntity="Categoriearticle")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idcat", referencedColumnName="idcat")
+     * })
+     */
+    private $idcat;
+
     public function getIdArticle(): ?int
     {
-        return $this->idArticle;
+        return $this->id_article;
     }
 
     public function getLibelle(): ?string
@@ -85,31 +104,32 @@ class Article
         return $this->categorie;
     }
 
-    public function setCategorie(string $categorie): self
+    public function setCategorie(?string $categorie): self
     {
         $this->categorie = $categorie;
 
         return $this;
     }
 
-    public function getImageArticle(): ?string
+    public function getImageArticle()
     {
         return $this->imageArticle;
     }
 
-    public function setImageArticle(string $imageArticle): self
+    public function setImageArticle( $imageArticle)
     {
         $this->imageArticle = $imageArticle;
 
         return $this;
     }
 
+
     public function getPrix(): ?int
     {
         return $this->prix;
     }
 
-    public function setPrix(int $prix): self
+    public function setPrix(?int $prix): self
     {
         $this->prix = $prix;
 
@@ -139,6 +159,32 @@ class Article
 
         return $this;
     }
+
+    public function getRate(): ?float
+    {
+        return $this->rate;
+    }
+
+    public function setRate(float $rate): self
+    {
+        $this->rate = $rate;
+
+        return $this;
+    }
+
+    public function getIdcat(): ?Categoriearticle
+    {
+        return $this->idcat;
+    }
+
+    public function setIdcat(?Categoriearticle $idcat): self
+    {
+        $this->idcat = $idcat;
+
+        return $this;
+    }
+
+
 
 
 }

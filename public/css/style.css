@@ -29,7 +29,7 @@ body {
 }
 
 body.demos .section {
-    background: url(../imgBack/backgrd.png) repeat top center #f2f3f5;
+    background: url(../images/bg.png) repeat top center #f2f3f5;
 }
 
 body.demos .section-title img {
@@ -2332,7 +2332,7 @@ select.mobile-device {
 }
 
 #contact {
-    background: url(../images/backgrd.png) no-repeat center center #fff;
+    background: url(../images/bg.png) no-repeat center center #fff;
 }
 
 .map-box{
@@ -2730,7 +2730,7 @@ body.host_version .first-section .effect-1.slide-btn::after{
 /**-------------- inner Page css ---------------**/
 
 .all-title-box{
-	background: url(../imgback/backgrd.png)no-repeat;
+	background: url(../images/banner.jpg)no-repeat;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
