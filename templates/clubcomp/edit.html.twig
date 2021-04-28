@@ -1,0 +1,13 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Edit Clubcomp{% endblock %}
+
+{% block body %}
+    <h1>Edit Clubcomp</h1>
+
+    {{ include('clubcomp/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('clubcomp_index') }}">Back to list</a>
+
+    {{ include('clubcomp/_delete_form.html.twig') }}
+{% endblock %}

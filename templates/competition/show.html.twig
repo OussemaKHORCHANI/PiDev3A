@@ -1,0 +1,32 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Competition{% endblock %}
+
+{% block body %}
+    <h1>Club participé à {{ competition.nomCompetition }}</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th><b>Nom Club</b></th>
+        </tr>
+        {% for clubco in clubcomp %}
+            {% if competition.nomCompetition is same as clubco.idCompetition.nomCompetition %}
+                <tr>
+                    <td>{{ clubco.idClub.nomClub }}</td>
+                </tr>
+            {% endif %}
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('competition_index') }}">Back to list /</a>
+
+    <a href="{{ path('competition_edit', {'idCompetition': competition.idCompetition}) }}"> Edit</a>
+
+    {{ include('competition/_delete_form.html.twig') }}
+{% endblock %}

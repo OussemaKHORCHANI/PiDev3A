@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Clubcomp{% endblock %}
+
+{% block body %}
+    <h1>Create new Clubcomp</h1>
+
+    {{ include('clubcomp/_form.html.twig') }}
+
+    <a href="{{ path('clubcomp_index') }}">Back to list</a>
+{% endblock %}

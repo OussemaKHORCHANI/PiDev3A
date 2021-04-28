@@ -1,0 +1,38 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Joueurs{% endblock %}
+
+{% block body %}
+    <h1>Joueur: {{ joueur.nom }} {{ joueur.prenom }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Nom</th>
+                <td>{{ joueur.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prénom</th>
+                <td>{{ joueur.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ joueur.age }}</td>
+            </tr>
+            <tr>
+                <th>NomClub</th>
+                <td>{{ joueur.idClub.nomClub }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ joueur.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('joueurs_index') }}"><button class="btn">{{ button_label|default('Back to list!') }}</button></a>
+
+    <a href="{{ path('joueurs_edit', {'id': joueur.id}) }}"> <button class="btn">Edit</button></a>
+
+    {{ include('joueurs/_delete_form.html.twig') }}
+{% endblock %}
