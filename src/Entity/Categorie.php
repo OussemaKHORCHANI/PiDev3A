@@ -3,19 +3,22 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Categorie
  *
  * @ORM\Table(name="categorie")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\CategorieRepository")
  */
 class Categorie
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="id_categorie", type="integer", nullable=false)
+
+     * @ORM\Column(name="id_categorie", type="integer", nullable=false, options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -23,7 +26,8 @@ class Categorie
 
     /**
      * @var string
-     *
+     *@Assert\NotBlank
+     * message= " ce champs est obligatoire "
      * @ORM\Column(name="type", type="string", length=100, nullable=false)
      */
     private $type;
@@ -44,6 +48,9 @@ class Categorie
 
         return $this;
     }
-
+    public function __toString(): string
+    {
+        return $this->getType();
+    }
 
 }

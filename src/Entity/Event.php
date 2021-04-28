@@ -3,12 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Event
  *
- * @ORM\Table(name="event", indexes={@ORM\Index(name="fk_event", columns={"categories_id"})})
- * @ORM\Entity
+ * @ORM\Table(name="event")
+ * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
  */
 class Event
 {
@@ -22,60 +22,91 @@ class Event
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      *
+     * @ORM\Column(name="categories_id", type="string", length=255, nullable=true)
+     */
+    private $categoriesId;
+
+
+
+    private $type;
+    /**
+     * @var string
+     * * @Assert\NotBlank(message = "remplissez le champ SVP")
+     *  @Assert\Length(min = 3,max = 20,minMessage = "Le nom doit comporter au moins {{ limit }} caractères",maxMessage = "Le nom ne doit pas dépasser {{ limit }} caractères")
      * @ORM\Column(name="Nom", type="string", length=255, nullable=false)
      */
     private $nom;
 
     /**
      * @var string|null
+     * @Assert\NotBlank(
+     * message = "remplissez le champ SVP"
+     * )
+     *  @Assert\Length(
+     *      min = 3,
+     *      max = 20,
+     *      minMessage = "Le nom doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "Le nom ne doit pas dépasser {{ limit }} caractères"
      *
+     * )
      * @ORM\Column(name="Description", type="string", length=255, nullable=true)
      */
     private $description;
 
     /**
      * @var string|null
+     * @Assert\NotBlank(
+     * message = "remplissez le champ SVP"
+     * )
+     *  @Assert\Length(
+     *      min = 3,
+     *      max = 20,
+     *      minMessage = "Le nom doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "Le nom ne doit pas dépasser {{ limit }} caractères"
      *
+     * )
      * @ORM\Column(name="Lieu_event", type="string", length=255, nullable=true)
      */
     private $lieuEvent;
 
     /**
      * @var \DateTime|null
-     *
+      * @Assert\Range(min = "now", minMessage ="la date doit etre apres la date d'aujourdhui")
      * @ORM\Column(name="Date_event", type="date", nullable=true)
      */
     private $dateEvent;
 
     /**
      * @var float|null
-     *
+    *@Assert\Regex(pattern="/^[0-9]*$/", message="number_only")
      * @ORM\Column(name="Prix", type="float", precision=10, scale=0, nullable=true)
      */
     private $prix;
 
     /**
      * @var int|null
-     *
+     * @Assert\Regex(pattern="/^[0-9]*$/", message="number_only")
      * @ORM\Column(name="etat", type="integer", nullable=true)
      */
     private $etat;
 
-    /**
-     * @var \Categorie
-     *
-     * @ORM\ManyToOne(targetEntity="Categorie")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="categories_id", referencedColumnName="id_categorie")
-     * })
-     */
-    private $categories;
-
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getCategoriesId()
+    {
+        return $this->categoriesId;
+    }
+
+    public function setCategoriesId( $categoriesId)
+    {
+        $this->categoriesId = $categoriesId;
+
+        return $this;
     }
 
     public function getNom(): ?string
@@ -150,17 +181,19 @@ class Event
         return $this;
     }
 
-    public function getCategories(): ?Categorie
+    public function getType(): ?string
     {
-        return $this->categories;
+        return $this->type;
     }
 
-    public function setCategories(?Categorie $categories): self
+    public function setType(?string $Type): self
     {
-        $this->categories = $categories;
+        $this->type = $Type;
 
         return $this;
     }
+
+
 
 
 }
