@@ -57,20 +57,20 @@ class ReservationController extends AbstractController
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
-                $mail->Username   = 'ousskh63@gmail.com';             // SMTP username
-                $mail->Password   = 'oussamossoussamosskh63';                               // SMTP password
+                $mail->Username   = 'oussema.khorchani@esprit.tn';             // SMTP username
+                $mail->Password   = '203JMT1891';                               // SMTP password
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port       = 587;
 
                 //Recipients
                 $mail->setFrom('oussema.khorchani@esprit.tn', 'SurTerrain');
-                $mail->addAddress('oussema.khorchani@esprit.tn');     // Add a recipient
+                $mail->addAddress('ousskh63@gmail.com');     // Add a recipient
 
                 // Content
-                $corps="Bonjour Monsieur/Madame notre nouveau evenement " ;
+                $corps="Bonjour Monsieur/Madame votre réservation ajoutée avec succée " ;
                 $mail->Subject = 'validation de réservation!';
                 $mail->Body    = $corps;
-
+                $mail->send();
 
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
@@ -133,5 +133,63 @@ class ReservationController extends AbstractController
         }
 
         return $this->redirectToRoute('reservation_index');
+    }
+    /**
+     * @Route("/calendar/ok", name="calendar", methods={"GET"})
+     */
+    public function calendar(ReservationRepository $reservationRepository): Response
+    {
+        $res = $reservationRepository->findAll();
+
+        $rdvs = [];
+
+        foreach($res as $reservation){
+            $rdvs[] = [
+
+                'date' => $reservation->getDate()->format('Y-m-d'),
+
+            ];
+        }
+
+        $data = json_encode($rdvs);
+
+
+        return $this->render('reservation/calendar.html.twig',compact('data'));
+    }
+    /**
+     * @Route("/imprimer/pdf", name="imprimer_index")
+     */
+    public function pdf(ReservationRepository $reservationRepository): Response
+
+    {
+
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', "Gill Sans MT");
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        $reservation = $reservationRepository->findAll();
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('reservation/pdf.html.twig', [
+            'reservation' =>  $reservation,
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (inline view)
+        $dompdf->stream("Liste reservation.pdf", [
+            "Attachment" => true
+        ]);
+
     }
 }

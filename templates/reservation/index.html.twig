@@ -17,8 +17,10 @@
 						<form class="navbar-form">
 							<input
 							class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+							<a class="btn btn-primary" href="{{path('imprimer_index')}}" > Imprimer </a>
+							<a href="{{ path('calendar') }}" class="btn btn-warning">Calendrier </a>
 
-
+						</form>
 						<!--  search form end -->
 						</div>
 				</header>
@@ -44,9 +46,8 @@
 								<td>{{ reservation.idClient }}</td>
 								<td>{{ reservation.idTerrain }}</td>
 								<td>
-									<a class="btn btn-primary" href="{{ path('reservation_show', {'idres': reservation.idres}) }}">Afficher</a>
-									 <a class="btn btn-warning"href="{{ path('reservation_delete', {'idres': reservation.idres}) }}">Supprimer</a>
-									<a class="btn btn-success" href="{{ path('reservation_new') }}">Valider</a>
+									<a class="btn btn-default" href="{{ path('reservation_show', {'idres': reservation.idres}) }}">Afficher</a>
+
 								</td>
 							</tr>
 						{% else %}

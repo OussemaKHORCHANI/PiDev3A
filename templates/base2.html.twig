@@ -11,6 +11,9 @@
 
     <title> SurTerrain</title>
     {% block CSS %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css">
         <!-- Bootstrap CSS -->
         <link href="{{asset('cssBack/bootstrap.min.css')}}" rel="stylesheet">
         <!-- bootstrap theme -->
@@ -358,7 +361,7 @@
 
 
                     <li class="sub-menu">
-                        <a class="" href="javascript:;"">
+                        <a class="" href="javascript:;">
                         <i class="icon_bag_alt"></i>
                         <span>Store</span>
                         <span class="menu-arrow arrow_carrot-right"></span>
@@ -1080,7 +1083,7 @@
 <!-- container section start -->
 {% block JS %}
     <!-- javascripts -->
-    <script src="{{asset('jsBack/jquery.js')}}"></script>
+    {#  <script src="{{asset('jsBack/jquery.js')}}"></script>
     <script src="{{asset('jsBack/jquery-ui-1.10.4.min.js')}}"></script>
     <script src="{{asset('jsBack/jquery-1.8.3.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('jsBack/jquery-ui-1.9.2.custom.min.js')}}"></script>
@@ -1108,7 +1111,7 @@
     <!--custome script for all page-->
     <script src="{{asset('jsBack/scripts.js')}}"></script>
     <!-- custom script for this page-->
-    <script src="{{asset('jsBack/sparkline-chart.js')}}"></script>
+     <script src="{{asset('jsBack/sparkline-chart.js')}}"></script>
     <script src="{{asset('jsBack/easy-pie-chart.js')}}"></script>
     <script src="{{asset('jsBack/jquery-jvectormap-1.2.2.min.js')}}"></script>
     <script src="{{asset('jsBack/jquery-jvectormap-world-mill-en.js')}}"></script>
@@ -1160,17 +1163,57 @@
                         normalizeFunction: 'polynomial'
                     }]
                 },
-                backgroundColor: '#eef3f7',
+                backgroundColor: '#7bb4e0',
                 onLabelShow: function(e, el, code) {
                     el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
                 }
             });
         });
-    </script>
+    </script>#}
     <!-- Flashy depends on jQuery -->
     <script src="//code.jquery.com/jquery.js"></script>
     <!-- Load Flashy default JavaScript -->
     <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            var calendarEl = document.getElementById('calendar-holder');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                defaultView: 'dayGridMonth',
+                editable: true,
+                eventSources: [
+                    {
+                        url: "/fc-load-events",
+                        method: "POST",
+                        extraParams: {
+                            filters: JSON.stringify({})
+                        },
+                        failure: () => {
+                            // alert("There was an error while fetching FullCalendar!");
+                        },
+                    },
+                ],
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay',
+                },
+                plugins: [ 'interaction', 'dayGrid', 'timeGrid' ], // https://fullcalendar.io/docs/plugin-index
+                timeZone: 'UTC',
+            });
+            calendar.render();
+        });
+         </script>
+    {#<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        {{ gc_draw(piechart, 'div_chart') }}
+    </script> #}
+
 {% endblock %}
 {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 </body>

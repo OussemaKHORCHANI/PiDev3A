@@ -108,7 +108,7 @@ class TerrainController extends AbstractController
      */
     public function stat(){
 
-        $repository = $this->getDoctrine()->getRepository(terrain::class);
+      /*  $repository = $this->getDoctrine()->getRepository(terrain::class);
         $etat ="disponible";
        $terrain = $repository->findOneBy(array('etat' => $etat));
 
@@ -152,7 +152,28 @@ class TerrainController extends AbstractController
         $pieChart->getOptions()->getTitleTextStyle()->setColor('#303030');
         $pieChart->getOptions()->getTitleTextStyle()->setItalic(false);
         $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
-        $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
+        $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);*/
+
+        $pieChart = new PieChart();
+
+
+
+        $pieChart->getData()->setArrayToDataTable( array(
+            ['etat', 'nombre'],
+            ['disponible',     31.5],
+            ['réservé',      68.5],
+        ));
+
+        $pieChart->getOptions()->setTitle('Etat des terrains:');
+        $pieChart->getOptions()->setHeight(500);
+        $pieChart->getOptions()->setWidth(900);
+        $pieChart->getOptions()->getTitleTextStyle()->setColor('#07600');
+        $pieChart->getOptions()->getTitleTextStyle()->setFontSize(25);
+
+
+
+
+
 
         return $this->render('terrain/stat.html.twig', array('piechart' => $pieChart));
     }

@@ -17,7 +17,7 @@
 						<form class="navbar-form">
 							<input class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
 							<a class="btn btn-primary" href="{{path('imprimer_index')}}" > Imprimer </a>
-							<a class="btn btn-custom" href="{{path('map_index')}}" > Map </a>
+							<a class="btn btn-warning" href="{{path('statistique')}}" > Statistiques </a>
 						</form>
 
 					</div>
@@ -54,15 +54,9 @@
 									<td>{{ terrain.photo }}</td>
 									<td>
 										<div class="btn-group">
-											<a class="btn btn-primary" href="{{ path('terrain_show', {'idterrain': terrain.idterrain}) }}">
-												<i class="icon_plus_alt2"></i>
-											</a>
-											<a class="btn btn-info" href="{{ path('terrain_edit', {'idterrain': terrain.idterrain}) }}">
-												<i class="icon_close_alt2"></i>
-											</a>
-											<a class="btn btn-danger" href="{{ path('terrain_delete', {'idterrain': terrain.idterrain}) }}">
-												<i class="icon_close_alt2"></i>
-											</a>
+											<a class="btn btn-default" href="{{ path('terrain_show', {'idterrain': terrain.idterrain}) }}">Afficher</a>
+
+
 										</div>
 									</td>
 								</tr>
