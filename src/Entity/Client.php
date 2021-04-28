@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Client
@@ -10,8 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="client")
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
+ *
+ * @UniqueEntity(fields={"email"}, message="L'Email que vous avez indiqué est deja utlisé !")
  */
-class Client
+class Client implements UserInterface
 {
     /**
      * @var int
@@ -26,6 +31,7 @@ class Client
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=15, nullable=false)
+     * @Assert\NotBlank(message="Nom est obligatoire")
      */
     private $nom;
 
@@ -33,6 +39,7 @@ class Client
      * @var string
      *
      * @ORM\Column(name="prenom", type="string", length=15, nullable=false)
+     * @Assert\NotBlank(message="Prenom est obligatoire")
      */
     private $prenom;
 
@@ -40,6 +47,7 @@ class Client
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=20, nullable=false)
+     * @Assert\NotBlank(message="L'Adresse est obligatoire")
      */
     private $address;
 
@@ -47,6 +55,12 @@ class Client
      * @var int
      *
      * @ORM\Column(name="numTelC", type="integer", nullable=false)
+     * *@Assert\NotBlank(message="Numero de tel. est obligatoire")
+     * @Assert\Length(
+     *      min = 8,
+     *      minMessage = "Votre numéro de tel. doit avoir {{ limit }} chiffres.",
+     *      allowEmptyString = false
+     * )
      */
     private $numtelc;
 
@@ -54,6 +68,8 @@ class Client
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=30, nullable=false)
+     * @Assert\NotBlank(message="Email est obligatoire")
+     * @Assert\Email(message = "Mail '{{ value }}' n'est pas Valide.")
      */
     private $email;
 
@@ -61,8 +77,21 @@ class Client
      * @var string
      *
      * @ORM\Column(name="mdp", type="string", length=30, nullable=false)
+     * @Assert\NotBlank(message="Mot de Passe est obligatoire")
+     * @Assert\EqualTo(propertyPath="confirm_mdp",message="Votre Mot de passe doit etre le meme que vous avez confirmez")
+     *
+     *
      */
     private $mdp;
+    /**
+     * @Assert\NotBlank(message="Mot de Passe est obligatoire")
+     * @Assert\EqualTo(propertyPath="mdp",message="Vous N'avez pas tapez le meme Mot de Passe")
+     *
+     *
+     */
+
+    public $confirm_mdp;
+    protected $captchaCode;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
@@ -145,22 +174,68 @@ class Client
 
         return $this;
     }
-
     public function __toString(): string
     {
         return $this->getNom();
     }
 
-    public function getResetToken(): ?string
+    /**
+     * Returns the roles granted to the user.
+     *
+     * @return Role[] The user roles
+     */
+    public function getRoles()
+    {
+        return array('ROLE_CLIENT');
+    }
+
+    public function getPassword(): string
+    {
+        return (string)$this->mdp;
+    }
+    public function setPassword($mdp)
+    {
+        $this->mdp = $mdp;
+
+    }
+
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    public function getUsername() : string
+    {
+       return (string) $this->email;
+    }
+
+    public function eraseCredentials(){}
+    public function getCaptchaCode()
+    {
+        return $this->captchaCode;
+    }
+
+    public function setCaptchaCode($captchaCode)
+    {
+        $this->captchaCode = $captchaCode;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResetToken()
     {
         return $this->reset_token;
     }
 
-    public function setResetToken(?string $reset_token): self
+    /**
+     * @param mixed $reset_token
+     */
+    public function setResetToken($reset_token): void
     {
         $this->reset_token = $reset_token;
-
-        return $this;
     }
+
+
 
 }

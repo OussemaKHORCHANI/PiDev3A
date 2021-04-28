@@ -1,0 +1,64 @@
+{% block body %}
+
+    <div class="content">
+    <div class="container-fluid">
+    <div class="row">
+    <div class="col-md-12">
+    <div class="card">
+    <div class="card-header card-header-primary">
+        <h1 align="center" style="color:black;">Admin</h1>
+        <h2  align="center"style="color:green;" > Liste Des Admin </h2>
+    </div>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            #customers {
+                font-family: Gabriola, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            #customers td, #customers th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+            #customers tr:hover {background-color: #ddd;}
+
+            #customers th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: brown;
+                color: white;
+            }
+        </style>
+    </head>
+<body>
+
+<table id="customers">
+
+    <tr>
+        <th>Nom</th>
+        <th> Prenom</th>
+        <th>Username</th>
+        <th> Email</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for admin in admins %}
+        <tr>
+            <td>{{ admin.nom }}</td>
+            <td>{{ admin.prenom }}</td>
+            <td>{{ admin.username }}</td>
+            <td>{{ admin.email }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </tbody>
+</table>
+{% endblock %}

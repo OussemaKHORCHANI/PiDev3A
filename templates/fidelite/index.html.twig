@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fidelite index{% endblock %}
+
+{% block body %}
+    <h1>Fidelite index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idfidelite</th>
+                <th>NomClient</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fidelite in fidelites %}
+            <tr>
+                <td>{{ fidelite.idfidelite }}</td>
+                <td>{{ fidelite.idClient }}</td>
+                <td>
+                    <a href="{{ path('fidelite_show', {'idfidelite': fidelite.idfidelite}) }}">show</a>
+                    <a href="{{ path('fidelite_edit', {'idfidelite': fidelite.idfidelite}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('fidelite_new') }}">Create new</a>
+{% endblock %}

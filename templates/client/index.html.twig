@@ -1,0 +1,80 @@
+{% extends 'base2.html.twig' %}
+
+{% block head %}
+
+<!--main content start-->
+
+<section id="main-content">
+    <section class="wrapper">
+        <!--overview start-->
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa-cogs"></i> Gestion Client</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+                    <li><i class="fa fa-user"></i>Client</li>
+                </ol>
+            </div>
+        </div>
+        <input class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder=" Rechercher" aria-label="search" aria-describedby="search">
+        {% endblock %}
+
+        {% block formullist %}
+    <h1>Client </h1>
+
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Liste Des Client
+            </header>
+
+            <table class="table table-striped table-advance table-hover">
+                <thead>
+                <tr>
+                    <th><i class="icon_profile"></i> Nom</th>
+                    <th><i class="icon_profile"></i> Prenom</th>
+                    <th><i class="icon_profile"></i> Adresse</th>
+                    <th><i class="icon_profile"></i> Numero de Telephone</th>
+                    <th><i class="icon_mail_alt"></i> Email</th>
+                </tr>
+                </thead>
+                <tbody id="hi">
+                {% for client in clients %}
+                    <tr>
+                        <td>{{ client.nom }}</td>
+                        <td>{{ client.prenom }}</td>
+                        <td>{{ client.address }}</td>
+                        <td>{{ client.numtelc }}</td>
+                        <td>{{ client.email }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <a class="btn btn-primary" href="{{ path('client_new') }}"><i class="icon_plus_alt2"></i></a>
+                                <a class="btn btn-success" href="{{ path('client_edit', {'idc': client.idc}) }}"><i class="icon_check_alt2"></i></a>
+                                <a class="btn btn-danger" href="{{ path('client_delete', {'idc': client.idc}) }}"><i class="icon_close_alt2"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#hi tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+    {% endblock  formullist %}

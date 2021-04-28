@@ -3,14 +3,18 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Adherant
  *
  * @ORM\Table(name="adherant")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\AdherantRepository")
+ *
  */
-class Adherant
+class Adherant implements UserInterface
 {
     /**
      * @var int
@@ -25,6 +29,7 @@ class Adherant
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=15, nullable=false)
+     * @Assert\NotBlank(message="Nom est obligatoire")
      */
     private $nom;
 
@@ -32,6 +37,7 @@ class Adherant
      * @var string
      *
      * @ORM\Column(name="prenom", type="string", length=15, nullable=false)
+     * @Assert\NotBlank(message="Prenom est obligatoire")
      */
     private $prenom;
 
@@ -39,6 +45,7 @@ class Adherant
      * @var int
      *
      * @ORM\Column(name="cin", type="integer", nullable=false)
+     * @Assert\NotBlank(message="CIN est obligatoire")
      */
     private $cin;
 
@@ -46,6 +53,12 @@ class Adherant
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=20, nullable=false)
+     * @Assert\NotBlank(message="L'adresse est obligatoire")
+     * @Assert\Length(
+     *      min = 8,
+     *      minMessage = "Votre CIN doit avoir {{ limit }} chiffres.",
+     *      allowEmptyString = false
+     * )
      */
     private $address;
 
@@ -53,6 +66,7 @@ class Adherant
      * @var string
      *
      * @ORM\Column(name="nomTerain", type="string", length=20, nullable=false)
+     * @Assert\NotBlank(message="le Nom de Terrain est obligatoire")
      */
     private $nomterain;
 
@@ -60,6 +74,8 @@ class Adherant
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=30, nullable=false)
+     * @Assert\NotBlank(message="Email est obligatoire")
+     * @Assert\Email(message = "Mail '{{ value }}' n'est pas Valide.")
      */
     private $email;
 
@@ -67,6 +83,12 @@ class Adherant
      * @var int
      *
      * @ORM\Column(name="numTel", type="integer", nullable=false)
+     * @Assert\NotBlank(message="Numero de tel. est obligatoire")
+     * @Assert\Length(
+     *      min = 8,
+     *      minMessage = "votre numéro de tel. doit avoir {{ limit }} chiffres.",
+     *      allowEmptyString = false
+     * )
      */
     private $numtel;
 
@@ -74,8 +96,10 @@ class Adherant
      * @var string
      *
      * @ORM\Column(name="mdp", type="string", length=30, nullable=false)
+     * @Assert\NotBlank(message="Mot de Passe est obligatoire")
      */
     private $mdp;
+
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
@@ -135,7 +159,7 @@ class Adherant
         return $this;
     }
 
-    public function getNomterain(): ?string
+    public function getNomterain(): ?String
     {
         return $this->nomterain;
     }
@@ -182,18 +206,49 @@ class Adherant
 
         return $this;
     }
+    /**
+     * Returns the roles granted to the user.
+     *
+     * @return Role[] The user roles
+     */
 
-    public function getResetToken(): ?string
+    public function getRoles()
+    {
+        return array('ROLE_ADHERANT');
+    }
+
+    public function getPassword(): string
+    {
+        return (string)$this->mdp;
+    }
+    public function setPassword($mdp)
+    {
+        $this->mdp = $mdp;
+
+    }
+
+    public function getSalt(){}
+
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+
+    public function eraseCredentials(){}
+
+    /**
+     * @return mixed
+     */
+    public function getResetToken()
     {
         return $this->reset_token;
     }
 
-    public function setResetToken(?string $reset_token): self
+    /**
+     * @param mixed $reset_token
+     */
+    public function setResetToken($reset_token): void
     {
         $this->reset_token = $reset_token;
-
-        return $this;
     }
-
-
 }

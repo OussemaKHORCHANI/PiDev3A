@@ -11,6 +11,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Client|null findOneBy(array $criteria, array $orderBy = null)
  * @method Client[]    findAll()
  * @method Client[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method findOneByEmail(mixed $email)
+ *
  */
 class ClientRepository extends ServiceEntityRepository
 {
@@ -18,6 +20,7 @@ class ClientRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Client::class);
     }
+
 
     // /**
     //  * @return Client[] Returns an array of Client objects
@@ -47,4 +50,5 @@ class ClientRepository extends ServiceEntityRepository
         ;
     }
     */
+
 }

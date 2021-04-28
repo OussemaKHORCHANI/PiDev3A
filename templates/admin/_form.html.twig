@@ -1,0 +1,18 @@
+
+  {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+  <table ALIGN="Center" >
+      <tr><td>{{ form_row(form.nom ,{'label':'Nom'}) }}</td></tr>
+      <tr><td>{{ form_row(form.prenom ,{'label':'Prenom'}) }}</td></tr>
+      <tr><td>{{ form_row(form.username ,{'label':'Username'}) }}</td></tr>
+      <tr><td>{{ form_row(form.email ,{'label':'Email'}) }}</td></tr>
+      <tr><td>{{ form_row(form.mdp ,{'label':'Mot de Passe'}) }}</td></tr>
+      <tr><td> <button class="btn btn-success">{{ button_label|default('Creer') }}</button></td></tr>
+  </table>
+  {{ form_end(form) }}
+
+
+
+
+
+
+

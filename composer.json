@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "cmen/google-charts-bundle": "^4.0",
+		"captcha-com/symfony-captcha-bundle": "4.*",
         "composer/package-versions-deprecated": "1.11.99.1",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.3",
@@ -49,6 +50,7 @@
         "twilio/sdk": "^6.22",
         "yamilovs/sms-bundle": "1.0",
         "zhb/nexmo-bundle": "^0.1.0"
+		"symfonycasts/reset-password-bundle": "^1.7",
     },
     "require-dev": {
         "symfony/browser-kit": "^4.4",

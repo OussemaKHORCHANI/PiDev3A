@@ -3,14 +3,17 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Admin
  *
  * @ORM\Table(name="admin")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\AdminRepository")
  */
-class Admin
+class Admin implements UserInterface
 {
     /**
      * @var int
@@ -25,6 +28,7 @@ class Admin
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=15, nullable=false)
+     * @Assert\NotBlank(message="Nom est obligatoire")
      */
     private $nom;
 
@@ -32,6 +36,7 @@ class Admin
      * @var string
      *
      * @ORM\Column(name="prenom", type="string", length=15, nullable=false)
+     * @Assert\NotBlank(message="Prenom est obligatoire")
      */
     private $prenom;
 
@@ -39,6 +44,8 @@ class Admin
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=15, nullable=false)
+     * @Assert\NotBlank(message="Username is required")
+     *
      */
     private $username;
 
@@ -46,6 +53,8 @@ class Admin
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=30, nullable=false)
+     * @Assert\NotBlank(message="Email est obligatoire")
+     * @Assert\Email(message = "The email '{{ value }}' is not a valid email.")
      */
     private $email;
 
@@ -53,8 +62,10 @@ class Admin
      * @var string
      *
      * @ORM\Column(name="mdp", type="string", length=30, nullable=false)
+     * @Assert\NotBlank(message="Mot de Passe est obligatoire")
      */
     private $mdp;
+
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
@@ -125,18 +136,43 @@ class Admin
 
         return $this;
     }
+    /**
+     * Returns the roles granted to the user.
+     *
+     * @return Role[] The user roles
+     */
 
-    public function getResetToken(): ?string
+    public function getRoles()
+    {
+        return array('ROLE_ADMIN');
+    }
+
+    public function getPassword(): string
+    {
+        return (string)$this->mdp;
+    }
+    public function setPassword($mdp)
+    {
+        $this->mdp = $mdp;
+
+    }
+
+    public function getSalt(){}
+
+    public function eraseCredentials(){}
+    /**
+     * @return mixed
+     */
+    public function getResetToken()
     {
         return $this->reset_token;
     }
 
-    public function setResetToken(?string $reset_token): self
+    /**
+     * @param mixed $reset_token
+     */
+    public function setResetToken($reset_token): void
     {
         $this->reset_token = $reset_token;
-
-        return $this;
     }
-
-
 }

@@ -18,4 +18,6 @@ return [
     Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle::class => ['all' => true],
     Yamilovs\Bundle\SmsBundle\SmsBundle::class => ['all' => true],
     Zhb\NexmoBundle\ZhbNexmoBundle::class => ['all' => true],
+	SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle::class => ['all' => true],
+	Captcha\Bundle\CaptchaBundle\CaptchaBundle::class => ['all' => true],
 ];

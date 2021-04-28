@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fidelite{% endblock %}
+
+{% block body %}
+    <h1>Fidelite</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Idfidelite</th>
+                <th>NomClient</th>
+                <td>{{ fidelite.idfidelite }}</td>
+                <td>{{ fidelite.idClient }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('fidelite_index') }}">back to list</a>
+
+    <a href="{{ path('fidelite_edit', {'idfidelite': fidelite.idfidelite}) }}">edit</a>
+
+    {{ include('fidelite/_delete_form.html.twig') }}
+{% endblock %}
