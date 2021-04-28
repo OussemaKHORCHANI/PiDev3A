@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="clubcomp", indexes={@ORM\Index(name="fk_club", columns={"id_club"}), @ORM\Index(name="fk_comp", columns={"id_competition"})})
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ClubcompRepository")
  */
 class Clubcomp
 {
@@ -89,5 +90,9 @@ class Clubcomp
         return $this;
     }
 
+    public function __toString()
+    {
+        return (string) $this->getIdclubcomp();
+    }
 
 }

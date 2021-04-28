@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Joueurs
  *
  * @ORM\Table(name="joueurs", indexes={@ORM\Index(name="fk_clubs", columns={"id_club"})})
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\JoueursRepository")
  */
 class Joueurs
 {
@@ -25,6 +27,16 @@ class Joueurs
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=20, nullable=false)
+     * @Assert\NotBlank(
+     * message = "remplissez le champ SVP"
+     * )
+     *  @Assert\Length(
+     *      min = 3,
+     *      max = 20,
+     *      minMessage = "Le nom doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "Le nom ne doit pas dépasser {{ limit }} caractères"
+     *
+     * )
      */
     private $nom;
 
@@ -32,6 +44,16 @@ class Joueurs
      * @var string
      *
      * @ORM\Column(name="prenom", type="string", length=20, nullable=false)
+     * @Assert\NotBlank(
+     * message = "remplissez le champ SVP"
+     * )
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 20,
+     *      minMessage = "Le prenom doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "Le prenom ne doit pas dépasser {{ limit }} caractères"
+     *
+     * )
      */
     private $prenom;
 
@@ -39,11 +61,22 @@ class Joueurs
      * @var int
      *
      * @ORM\Column(name="age", type="integer", nullable=false)
+     * @Assert\NotBlank(
+     * message = "remplissez le champ SVP"
+     * )
+     * @Assert\GreaterThan  (
+     *     value = 10,
+     *     message = "L'age doit dépasser 10 ans"
+     * )
+     * @Assert\LessThan(
+     *     value = 25,
+     *     message = "L'age ne doit pas dépasser 25 ans"
+     * )
      */
     private $age;
 
     /**
-     * @var string|null
+     * @var string
      *
      * @ORM\Column(name="nom_club", type="string", length=11, nullable=true)
      */
@@ -53,6 +86,14 @@ class Joueurs
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=30, nullable=false)
+     * @Assert\Email(
+     *       message = "The email '{{ value }}' is not a valid email."
+     * )
+     * @Assert\NotBlank
+     * (
+     * message = "remplissez le champ SVP"
+     * )
+     *
      */
     private $email;
 
@@ -142,6 +183,7 @@ class Joueurs
 
         return $this;
     }
+
 
 
 }

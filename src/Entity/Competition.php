@@ -3,12 +3,15 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Competition
  *
  * @ORM\Table(name="competition")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\CompetitionRepository")
  */
 class Competition
 {
@@ -25,6 +28,9 @@ class Competition
      * @var string
      *
      * @ORM\Column(name="nom_competition", type="string", length=20, nullable=false)
+     * @Assert\NotBlank(
+     * message = "remplissez le champ SVP"
+     * )
      */
     private $nomCompetition;
 
@@ -32,6 +38,11 @@ class Competition
      * @var \DateTime
      *
      * @ORM\Column(name="date_debut", type="date", nullable=false)
+     * @Assert\Expression("this.getDateDebut() < this.getDateFin()",message= "verifier les dates ")
+     * @Assert\NotBlank(
+     * message = "remplissez le champ SVP"
+     * )
+     * @Assert\GreaterThan("today UTC")
      */
     private $dateDebut;
 
@@ -39,6 +50,14 @@ class Competition
      * @var \DateTime
      *
      * @ORM\Column(name="date_fin", type="date", nullable=false)
+     * @Assert\Expression(
+     * "this.getDateDebut() < this.getDateFin()",
+     *     message= "verifier les dates "
+     * )
+     *
+     * @Assert\NotBlank(
+     * message = "remplissez le champ SVP"
+     * )
      */
     private $dateFin;
 

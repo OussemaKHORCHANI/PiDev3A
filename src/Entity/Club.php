@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Club
  *
  * @ORM\Table(name="club")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ClubRepository")
  */
 class Club
 {
@@ -25,6 +27,16 @@ class Club
      * @var string
      *
      * @ORM\Column(name="nom_club", type="string", length=30, nullable=false)
+     * @Assert\NotBlank(
+     * message = "remplissez le champ SVP"
+     * )
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 10,
+     *      minMessage = "Le nom du club doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "Le nom du club ne doit pas dépasser {{ limit }} caractères"
+     *
+     * )
      */
     private $nomClub;
 
@@ -32,6 +44,13 @@ class Club
      * @var int
      *
      * @ORM\Column(name="nbr_joueurs", type="integer", nullable=false)
+     * @Assert\NotBlank(
+     * message = "remplissez le champ SVP"
+     * )
+     * @Assert\LessThan(
+     *     value =12 ,
+     *     message = "Le nombre de joueurs ne doit pas être supérieur à  11 "
+     * )
      */
     private $nbrJoueurs;
 
@@ -62,6 +81,11 @@ class Club
         $this->nbrJoueurs = $nbrJoueurs;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getNomClub();
     }
 
 
