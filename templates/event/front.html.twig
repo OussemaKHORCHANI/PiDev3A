@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{  <table class="table">
+    <thead>
+    <tr>
+
+        <th>CategoriesId</th>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>LieuEvent</th>
+        <th>DateEvent</th>
+        <th>Prix</th>
+
+
+    </tr>
+    </thead>
+
+    {% for event in events %}
+    <tr>
+
+        <td>{{ event.type }}</td>
+        <td>{{ event.nom }}</td>
+        <td>{{ event.description }}</td>
+        <td>{{ event.lieuEvent }}</td>
+        <td>{{ event.dateEvent ? event.dateEvent|date('Y-m-d') : '' }}</td>
+        <td>{{ event.prix }}</td>
+
+        <td>
+
+            <a href="{{ path('event_show', {'id': event.id}) }}">show</a>
+            <a href="{{ path('event_edit', {'id': event.id}) }}">edit</a>
+        </td>
+    </tr>
+    {% else %}
+        <tr>
+            <td colspan="9">no records found</td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+   }
+{% endblock %}

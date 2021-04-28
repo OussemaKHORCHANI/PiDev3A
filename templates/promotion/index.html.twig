@@ -1,0 +1,65 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Promotion index{% endblock %}
+
+{% block body %}
+    <h1>Promotion index</h1>
+
+    <div>
+        <!--  search form start -->
+
+
+        <form class="navbar-form">
+            <input class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+        </form>
+
+    </div>
+    <a class="btn btn-primary" href="{{ path('sortbytitleasc')}}">Sort By promotion ASC</a>
+    <table id="t" class="table">
+        <thead>
+            <tr>
+                <th>IdPromo</th>
+                <th>Pourcentage</th>
+                <th>DateDebut</th>
+                <th>DateFin</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody id="all" >
+        {% for promotion in promotions %}
+
+            <tr>
+                <td>{{ promotion.idPromo }}</td>
+                <td>{{ promotion.pourcentage }}</td>
+                <td>{{ promotion.dateDebut ? promotion.dateDebut|date('Y-m-d') : '' }}</td>
+                <td>{{ promotion.dateFin ? promotion.dateFin|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('promotion_show', {'idPromo': promotion.idPromo}) }}">show</a>
+                    <a href="{{ path('promotion_edit', {'idPromo': promotion.idPromo}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tbody id="hi"></tbody>
+    </table>
+
+    <a href="{{ path('promotion_new') }}">Create new</a>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#hi tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+
+{% endblock %}

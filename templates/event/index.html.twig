@@ -1,0 +1,73 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Event index{% endblock %}
+
+{% block body %}
+    <h1>Event index</h1>
+<div class="user-dashboard-table table-responsive " id="all">
+    <a href="{{ path('pdf_index') }}">Create pdf</a>
+    <a class="btn btn-primary" href="{{ path('sortbytitleasc')}}">Sort By Nom</a>
+    <div>
+        <!--  search form start -->
+
+
+        <form class="navbar-form">
+            <input class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+        </form>
+
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>CategoriesId</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>LieuEvent</th>
+                <th>DateEvent</th>
+                <th>Prix</th>
+
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody id="hi">
+        {% for event in events %}
+            <tr>
+
+               <td>{{ event.type }}</td>
+                <td>{{ event.nom }}</td>
+                <td>{{ event.description }}</td>
+                <td>{{ event.lieuEvent }}</td>
+                <td>{{ event.dateEvent ? event.dateEvent|date('Y-m-d') : '' }}</td>
+                <td>{{ event.prix }}</td>
+
+                <td>
+
+                    <a href="{{ path('event_show', {'id': event.id}) }}">show</a>
+                    <a href="{{ path('event_edit', {'id': event.id}) }}">edit</a>
+                </td>
+            </tr>
+
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+    <a href="{{ path('event_new') }}">Create new</a>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#hi tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+{% endblock %}

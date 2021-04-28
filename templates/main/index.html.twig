@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block title %}Calendrier{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        #calendrier{
+            width: 80%;
+            margin: auto;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    {{ dump(data) }}
+    <a href="{{ path('calendar') }}" class="btn btn-close">Retour</a>
+
+    <div id="calendar-holder" ></div>
+
+{% endblock %}
+
+
