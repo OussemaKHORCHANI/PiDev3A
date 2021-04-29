@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Demande
  *
  * @ORM\Table(name="demande")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\DemandeRepository")
  */
 class Demande
 {
@@ -25,6 +27,8 @@ class Demande
      * @var string
      *
      * @ORM\Column(name="date", type="string", length=200, nullable=false)
+     * @Assert\Date(message="date invalide")
+     * @Assert\NotBlank(message="le champs vide")
      */
     private $date;
 
@@ -32,6 +36,7 @@ class Demande
      * @var string
      *
      * @ORM\Column(name="nomterrain", type="string", length=200, nullable=false)
+     * @Assert\NotBlank(message="le champs vide")
      */
     private $nomterrain;
 
@@ -39,6 +44,7 @@ class Demande
      * @var string
      *
      * @ORM\Column(name="nomequipe", type="string", length=200, nullable=false)
+     * @Assert\NotBlank(message="le champs vide")
      */
     private $nomequipe;
 
@@ -46,6 +52,8 @@ class Demande
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=200, nullable=false)
+     * @Assert\NotBlank(message="le champs vide")
+     * @Assert\Email(message="email invalide")
      */
     private $email;
 

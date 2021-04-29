@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Equipe
  *
  * @ORM\Table(name="equipe")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\EquipeRepository")
  */
 class Equipe
 {
@@ -25,6 +27,7 @@ class Equipe
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=20, nullable=false)
+     * @Assert\NotBlank(message="le champs vide")
      */
     private $nom;
 
@@ -32,6 +35,7 @@ class Equipe
      * @var int
      *
      * @ORM\Column(name="nombre", type="integer", nullable=false)
+     *@Assert\NotBlank(message="le champs vide")
      */
     private $nombre;
 
