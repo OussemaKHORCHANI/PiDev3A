@@ -1,13 +1,20 @@
 {% extends 'base2.html.twig' %}
 
 {% block title %}Edit Joueurs{% endblock %}
-
-{% block body %}
+{% block head %}
+<section id="main-content">
+    <section class="wrapper">
+        <!--overview start-->
+        <div class="row">
+            <div class="col-lg-12">
+                {% endblock %}
+                {% block showterrain %}
     <h1>Edit Joueurs</h1>
 
-    {{ include('joueurs/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('joueurs/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('joueurs_index') }}">Back to list</a>
+    <a href="{{ path('joueurs_index') }}">Retour</a>
 
     {{ include('joueurs/_delete_form.html.twig') }}
+            </div></div></section></section>
 {% endblock %}

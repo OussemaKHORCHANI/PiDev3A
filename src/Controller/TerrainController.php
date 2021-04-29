@@ -4,13 +4,15 @@ namespace App\Controller;
 
 use App\Entity\Terrain;
 use App\Form\TerrainType;
+use App\Repository\ReservationRepository;
 use App\Repository\TerrainRepository;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\BarChart;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use MercurySeries\FlashyBundle\FlashyNotifier;
-use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
+
 use Dompdf\Dompdf;
 use Dompdf\Options;
 /**
@@ -106,46 +108,10 @@ class TerrainController extends AbstractController
     /**
      * @Route("/stats/chart", name="statistique")
      */
-    public function stat(){
-
-      /*  $repository = $this->getDoctrine()->getRepository(terrain::class);
-        $etat ="disponible";
-       $terrain = $repository->findOneBy(array('etat' => $etat));
-
-       $this->getDoctrine()->getManager();
-
-       // $repository = $this->getDoctrine()->getRepository(terrain::class);
-        //$terrain = $repository->findAll();
-        //$this->getDoctrine()->getManager();
+    public function stat(TerrainRepository $terrainRepository){
 
 
-        $etat1=0;
-        $etat2=0;
-
-
-
-        foreach ($terrain as $terrains)
-        {
-            if ( $terrain->getEtat()==$etat)  :
-
-                $etat1+=1;
-            else:
-
-                $etat2+=1;
-
-
-            endif;
-
-        }
-
-        $pieChart = new PieChart();
-        $pieChart->getData()->setArrayToDataTable(
-            [['etat', 'nombre'],
-                ['disponible',  $etat1],
-                ['réservé',  $etat2],
-            ]
-        );
-        $pieChart->getOptions()->setTitle('Etat de terrain:');
+        /*$pieChart->getOptions()->setTitle('Etat de terrain:');
         $pieChart->getOptions()->setHeight(500);
         $pieChart->getOptions()->setWidth(900);
         $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
@@ -153,29 +119,34 @@ class TerrainController extends AbstractController
         $pieChart->getOptions()->getTitleTextStyle()->setItalic(false);
         $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
         $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);*/
-
-        $pieChart = new PieChart();
-
-
-
-        $pieChart->getData()->setArrayToDataTable( array(
-            ['etat', 'nombre'],
-            ['disponible',     31.5],
-            ['réservé',      68.5],
-        ));
-
-        $pieChart->getOptions()->setTitle('Etat des terrains:');
-        $pieChart->getOptions()->setHeight(500);
-        $pieChart->getOptions()->setWidth(900);
-        $pieChart->getOptions()->getTitleTextStyle()->setColor('#07600');
-        $pieChart->getOptions()->getTitleTextStyle()->setFontSize(25);
+        $nbs = $terrainRepository->countEtat();
+        $data = [['e', 'stade']];
+        foreach( (array)$nbs as $nb)
+        {
+            $data[] = array($nb['e'], $nb['stade']);
+        }
 
 
 
 
 
+        $bar = new barchart();
+        $bar->getData()->setArrayToDataTable(
+            $data
+        );
 
-        return $this->render('terrain/stat.html.twig', array('piechart' => $pieChart));
+        $bar->getOptions()->setTitle('Etat des terrains:');
+        $bar->getOptions()->setHeight(500);
+        $bar->getOptions()->setWidth(900);
+        $bar->getOptions()->getTitleTextStyle()->setColor('#07600');
+        $bar->getOptions()->getTitleTextStyle()->setFontSize(25);
+
+
+
+
+
+
+        return $this->render('terrain/stat.html.twig', array('barchart' => $bar,'nbs' => $nbs));
     }
 
     /**

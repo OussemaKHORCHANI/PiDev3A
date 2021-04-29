@@ -1,10 +1,21 @@
 {% extends 'base2.html.twig' %}
 
-{% block title %}
-	Gérer les réservations
-{% endblock %}
+{% block head %}
 
-{% block body %}
+<section id="main-content">
+	<section class="wrapper">
+		<!--overview start-->
+		<div class="row">
+			<div class="col-lg-12">
+
+				<ol class="breadcrumb">
+					<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+					<li><i class="fa fa-bank"></i>Terrain</li>
+				</ol>
+			</div>
+		</div>
+		{% endblock %}
+		{% block formullist %}
 	<h1>Gérer les réservations</h1>
 	<div class="row">
 		<div class="col-lg-12">
@@ -15,8 +26,7 @@
 
 
 						<form class="navbar-form">
-							<input
-							class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+							<input class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
 							<a class="btn btn-primary" href="{{path('imprimer_index')}}" > Imprimer </a>
 							<a href="{{ path('calendar') }}" class="btn btn-warning">Calendrier </a>
 

@@ -2,7 +2,14 @@
 
 {% block title %}Terrain{% endblock %}
 
-{% block formcat %}
+{% block head %}
+<section id="main-content">
+    <section class="wrapper">
+        <!--overview start-->
+        <div class="row">
+            <div class="col-lg-12">
+{% endblock %}
+{% block showterrain %}
     <h1>Terrain</h1>
 
     <table class="table">
@@ -35,11 +42,14 @@
         </tbody>
 
     </table>
-    <table align="center"><tr><a href="{{ path('terrain_index') }}" class="btn btn-info">Retour</a>
+    <table align="center"><tr><a href="{{ path('terrain_index') }}" class="btn btn-success">Retour</a>
 
             <a href="{{ path('terrain_edit', {'idterrain': terrain.idterrain}) }}" class="btn btn-success">Modifier</a>
 
             {{ include('terrain/_delete_form.html.twig') }}</tr></table>
 
-
-{% endblock formcat%}
+            </div>
+        </div>
+    </section>
+</section>
+{% endblock %}

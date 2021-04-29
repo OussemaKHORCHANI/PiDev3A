@@ -1,8 +1,22 @@
 {% extends 'base2.html.twig' %}
 
 {% block title %}Promotion index{% endblock %}
+{% block head %}
 
-{% block body %}
+<section id="main-content">
+    <section class="wrapper">
+        <!--overview start-->
+        <div class="row">
+            <div class="col-lg-12">
+
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+                    <li><i class="fa fa-bank"></i>Terrain</li>
+                </ol>
+            </div>
+        </div>
+        {% endblock %}
+        {% block formullist %}
     <h1>Promotion index</h1>
 
     <div>
@@ -11,10 +25,12 @@
 
         <form class="navbar-form">
             <input class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+            <a class="btn btn-primary" href="{{ path('promotion_stat') }}"> statistique Promotion 📈</a>
+            <a class="btn btn-warning" href="{{ path('sortbytitleasc')}}">Sort By promotion ASC</a>
         </form>
 
     </div>
-    <a class="btn btn-primary" href="{{ path('sortbytitleasc')}}">Sort By promotion ASC</a>
+
     <table id="t" class="table">
         <thead>
             <tr>
@@ -60,6 +76,7 @@
             });
         });
     </script>
+    </section></section>
 
 
-{% endblock %}
+{% endblock formullist %}

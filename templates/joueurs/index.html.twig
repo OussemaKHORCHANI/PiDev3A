@@ -2,7 +2,22 @@
 
 {% block title %}Joueurs index{% endblock %}
 
-{% block body %}
+{% block head %}
+
+<section id="main-content">
+    <section class="wrapper">
+        <!--overview start-->
+        <div class="row">
+            <div class="col-lg-12">
+
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+                    <li><i class="fa fa-bank"></i>Terrain</li>
+                </ol>
+            </div>
+        </div>
+        {% endblock %}
+        {% block formullist %}
 
     <h1>Liste des joueurs</h1>
 <div class="row">
@@ -42,9 +57,9 @@
                 <td>{{ joueur.idClub.nomClub }}</td>
                 <td>{{ joueur.email }}</td>
                 <td>
-                    <a href="{{ path('joueurs_show', {'id': joueur.id}) }}">Show </a>
+                    <a href="{{ path('joueurs_show', {'id': joueur.id}) }}"  class="btn btn-primary">Show </a>
                     <a>/</a>
-                    <a href="{{ path('joueurs_edit', {'id': joueur.id}) }}"> Edit</a>
+                    <a href="{{ path('joueurs_edit', {'id': joueur.id}) }}"  class="btn btn-success" > Edit</a>
                 </td>
             </tr>
         {% else %}
@@ -57,7 +72,7 @@
         </section>
     </div>
 </div>
-    <a href="{{ path('joueurs_new') }}"><button class="btn">{{ button_label|default('Create New!') }}</button></a>
+    <a href="{{ path('joueurs_new') }}"><button class="btn btn-primary">{{ button_label|default('Create New!') }}</button></a>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script>

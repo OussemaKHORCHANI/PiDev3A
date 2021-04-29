@@ -23,6 +23,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncode;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use Swift_Mailer;
+use Swift_Message;
 /**
  * @Route("/event")
  */
@@ -59,7 +61,7 @@ class EventController extends AbstractController
     /**
      * @Route("/new", name="event_new", methods={"GET","POST"})
      */
-    public function new(Request $request ,FlashyNotifier $flashy): Response
+    public function new(Request $request ,FlashyNotifier $flashy,Swift_Mailer $mailer): Response
     {
         $event = new Event();
         $form = $this->createForm(EventType::class, $event);
@@ -72,19 +74,19 @@ class EventController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($event);
             $entityManager->flush();
-             $flashy->success('Event created!', 'http://your-awesome-link.com');
-
-            $mail = new PHPMailer(true);
+            $flashy->success('Event created!', 'http://your-awesome-link.com');
+            $nom = $form->get('nom')->getData();
+            /*$mail = new PHPMailer(true);
 
             try {
 
-                $nom = $form->get('nom')->getData();
+
 
 
                 /*$email = $form->get('emailadresse')->getData();*/
 
                 //Server settings
-                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+               /* $mail->SMTPDebug = SMTP::DEBUG_SERVER;
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
@@ -106,10 +108,24 @@ class EventController extends AbstractController
 
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            }
+            }*/
+            $corps="Bonjour Monsieur/Madame notre nouveau evenement ".$nom . " soyez les bienvenues" ;
+            $message = (new Swift_Message('Nouveau évènement'))
+                // On attribue l'expéditeur
+                ->setFrom('no-reply@Surterrain.com')
+                // On attribue le destinataire
+                ->setTo('arwa.bejaoui@esprit.tn')
+                // On crée le texte avec la vue
+
+                ->setBody( $corps )
+            ;
+            //envoie le msg
+            $mailer->send($message);
+
+            $this->addFlash('message', 'Votre message a été transmis, nous vous répondrons dans les meilleurs délais.');
 
             //end mailing
-            $flashy->success('Event created!', 'http://your-awesome-link.com');
+            //$flashy->success('Event created!', 'http://your-awesome-link.com');
             return $this->redirectToRoute('event_index');
         }
 
@@ -124,9 +140,9 @@ class EventController extends AbstractController
      * @Route("/{id}", name="event_show", methods={"GET"})
      */
     public function show(Event $event,FlashyNotifier $flashy): Response
-    { $flashy->success('Event created!', 'http://your-awesome-link.com');
-        $flashy->success('Event removed!', 'http://your-awesome-link.com');
-        $flashy->success('Event changed!', 'http://your-awesome-link.com');
+    { //$flashy->success('Event created!', 'http://your-awesome-link.com');
+        //$flashy->success('Event removed!', 'http://your-awesome-link.com');
+       // $flashy->success('Event changed!', 'http://your-awesome-link.com');
         return $this->render('event/show.html.twig', [
             'event' => $event,
         ]);
@@ -156,7 +172,7 @@ class EventController extends AbstractController
             return $this->redirectToRoute('event_index');
 
         }
-        $flashy->success('Event changed!', 'http://your-awesome-link.com');
+
         return $this->render('event/edit.html.twig', [
             'event' => $event,
             'form' => $form->createView(),

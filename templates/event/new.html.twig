@@ -2,10 +2,18 @@
 
 {% block title %}New Event{% endblock %}
 
-{% block body %}
+{% block head %}
+<section id="main-content">
+    <section class="wrapper">
+        <!--overview start-->
+        <div class="row">
+            <div class="col-lg-12">
+                {% endblock %}
+                {% block showterrain %}
     <h1>Create new Event</h1>
 
     {{ include('event/_form.html.twig') }}
 
-    <a href="{{ path('event_index') }}">back to list</a>
+    <a href="{{ path('event_index') }}" class="btn btn-primary">back to list</a>
+            </div></div></section></section>
 {% endblock %}

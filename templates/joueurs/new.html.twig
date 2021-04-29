@@ -2,10 +2,18 @@
 
 {% block title %}New Joueurs{% endblock %}
 
-{% block body %}
+{% block head %}
+<section id="main-content">
+    <section class="wrapper">
+        <!--overview start-->
+        <div class="row">
+            <div class="col-lg-12">
+                {% endblock %}
+                {% block showterrain %}
     <h1>Create new Joueurs</h1>
 
     {{ include('joueurs/_form.html.twig') }}
 
     <a href="{{ path('joueurs_index') }}"><button class="btn">Back to list</button></a>
+            </div></div></section></section>
 {% endblock %}

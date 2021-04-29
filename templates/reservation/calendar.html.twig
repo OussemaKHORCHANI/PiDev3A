@@ -1,11 +1,22 @@
 
 {% extends 'base2.html.twig' %}
+{% block head %}
+<section id="main-content">
+    <section class="wrapper">
+        <!--overview start-->
+        <div class="row">
+            <div class="col-lg-12">
+                {% endblock %}
+                {% block showterrain %}
 
-{% block body %}
-    <a href="{{ path('reservation_index') }}" class="btn btn-close">Retour</a>
+    <a href="{{ path('reservation_index') }}" class="btn btn-primary">Retour</a>
 
-    <div id="calendar-holder"></div>
+    <div id="calendar-holder" class="col-lg-12"></div>
     dump{{ (data) }}
+            </div>
+        </div>
+    </section>
+</section>
 {% endblock %}
 
 

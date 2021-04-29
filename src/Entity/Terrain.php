@@ -9,7 +9,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Terrain
  *
  * @ORM\Table(name="terrain")
- * @ORM\Entity
  * @ORM\Entity(repositoryClass="App\Repository\TerrainRepository")
  */
 class Terrain

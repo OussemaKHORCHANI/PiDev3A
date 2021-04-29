@@ -1,13 +1,23 @@
 {% extends 'base2.html.twig' %}
 
-{% block title %}New Terrain{% endblock %}
+{% block title %}Nouveau Terrain{% endblock %}
+{% block head %}
+<section id="main-content">
+    <section class="wrapper">
+        <!--overview start-->
+        <div class="row">
+            <div class="col-lg-12">
+                {% endblock %}
+{% block showterrain %}
 
-{% block body %}
+
+         {{ include('terrain/_form.html.twig') }}<br>
 
 
-         {{ include('terrain/_form.html.twig') }}
-
-
-    <a href="{{ path('terrain_index') }}">back to list</a>
+    <a href="{{ path('terrain_index') }}" class="btn btn-primary">Retour</a>
+            </div>
+        </div>
+    </section>
+</section>
 {% endblock %}
 

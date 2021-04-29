@@ -2,7 +2,22 @@
 
 {% block title %}Competition index{% endblock %}
 
-{% block body %}
+{% block head %}
+
+<section id="main-content">
+    <section class="wrapper">
+        <!--overview start-->
+        <div class="row">
+            <div class="col-lg-12">
+
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+                    <li><i class="fa fa-empire"></i>Competition</li>
+                </ol>
+            </div>
+        </div>
+        {% endblock %}
+        {% block formullist %}
     <h1>Competitions</h1>
 <div class="row">
     <div class="col-lg-12">
@@ -38,9 +53,9 @@
                 <td>{{ competition.dateDebut ? competition.dateDebut|date('Y-m-d') : '' }}</td>
                 <td>{{ competition.dateFin ? competition.dateFin|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('competition_show', {'idCompetition': competition.idCompetition}) }}">Show </a>
+                    <a href="{{ path('competition_show', {'idCompetition': competition.idCompetition}) }}"  class="btn btn-primary">Show </a>
                     <a>/</a>
-                    <a href="{{ path('competition_edit', {'idCompetition': competition.idCompetition}) }}"> Edit</a>
+                    <a href="{{ path('competition_edit', {'idCompetition': competition.idCompetition}) }}"  class="btn btn-success"> Edit</a>
                 </td>
             </tr>
         {% else %}
@@ -53,7 +68,7 @@
         </section>
     </div>
 </div>
-    <a href="{{ path('competition_new') }}"><button class="btn">{{ button_label|default('Create New!') }}</button></a>
+    <a href="{{ path('competition_new') }}"><button class="btn btn-success">{{ button_label|default('Create New!') }}</button></a>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script>

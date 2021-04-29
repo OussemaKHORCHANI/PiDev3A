@@ -1,4 +1,38 @@
 {% extends 'base.html.twig' %}
+{% block header %}
+    <!-- Start header -->
+    <header class="top-navbar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{asset('index.html')}}">
+                    <img src="{{ asset('images/logo (2).png') }}" alt="" />
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-host" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbars-host">
+                    <ul class="navbar-nav ml-auto">
+
+                        <li class="nav-item   "><a class="nav-link" href="{{path('reservation_new')}}">Terrain</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{asset('features.html')}}">Making Match </a></li>
+
+                        <li class="nav-item active "><a class="nav-link" href="{{path('listarticlefront')}}">Store</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{asset('pricing.html')}}">Event</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{asset('contact.html')}}">Club</a></li>
+
+                        <li class="nav-item"><a class="nav-link" href="{{path('app_login')}}">Se déconnecter</a></li>
+                    </ul>
+                    {#  <ul class="nav navbar-nav navbar-right">
+                        <li><a class="hover-btn-new log" href="#" data-toggle="modal" data-target="#login"><span>Se connecter</span></a></li>
+                    </ul>#}
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- End header -->
+{% endblock %}
  {% block listarticle %}
      <div width="200%">
          <form method="post" id="contactForm" action="{{ path('rechercheart') }}" id="search_form_1" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
@@ -48,7 +82,7 @@
                      <div class="row">
                          <div class="col-lg-6">
                              <div class="offers_image_container">
-                                 <img class="card-img-top" src={{ c.imageArticle}}   style="height:300px;Width:300px">
+                                 <img class="card-img-top" src={{ asset('image/' ~ c.imageArticle) }}   style="height:300px;Width:300px">
                              </div>
                          </div>
 

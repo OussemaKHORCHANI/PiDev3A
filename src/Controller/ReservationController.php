@@ -13,6 +13,8 @@ use MercurySeries\FlashyBundle\FlashyNotifier;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+use Swift_Mailer;
+use Swift_Message;
 
 /**
  * @Route("/reservation")
@@ -33,7 +35,7 @@ class ReservationController extends AbstractController
      * @Route("/new", name="reservation_new", methods={"GET","POST"})
      * @Route("/validation", name="validation", methods={"GET","POST"})
      */
-    public function new(Request $request,FlashyNotifier $flashy): Response
+    public function new(Request $request,FlashyNotifier $flashy ,Swift_Mailer $mailer): Response
     {
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class, $reservation);
@@ -44,7 +46,7 @@ class ReservationController extends AbstractController
             $entityManager->persist($reservation);
             $entityManager->flush();
             $flashy->info('réservation ajoutée avec succée', 'http://your-awesome-link.com');
-            $mail = new PHPMailer(true);
+            /*$mail = new PHPMailer(true);
             try {
 
                 //$nom = $form->get('idclient')->getData();
@@ -53,7 +55,7 @@ class ReservationController extends AbstractController
                 /*$email = $form->get('emailadresse')->getData();*/
 
                 //Server settings
-                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                /*$mail->SMTPDebug = SMTP::DEBUG_SERVER;
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
@@ -74,7 +76,21 @@ class ReservationController extends AbstractController
 
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            }
+            }*/
+            $corps="Bonjour Monsieur/Madame votre réservation ajoutée avec succée " ;
+            $message = (new Swift_Message('Nouveau Article'))
+                // On attribue l'expéditeur
+                ->setFrom('no-reply@Surterrain.com')
+                // On attribue le destinataire
+                ->setTo('arwa.bejaoui@esprit.tn')
+                // On crée le texte avec la vue
+
+                ->setBody( $corps )
+            ;
+            //envoie le msg
+            $mailer->send($message);
+
+            $this->addFlash('message', 'Votre message a été transmis, nous vous répondrons dans les meilleurs délais.');
             return $this->render('reservation/validation.html.twig');
 
 

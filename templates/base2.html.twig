@@ -17,6 +17,11 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
+
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css">
+
         <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
 
         <!-- Bootstrap CSS -->
@@ -284,7 +289,7 @@
                             <span class="profile-ava">
                                 <img alt="" src="{{asset('imgBack/avatar1_small.jpg')}}">
                             </span>
-                            <span class="username">Salah Ben Aziza</span>
+                            <span class="username">Admin</span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -325,40 +330,42 @@
             <div id="sidebar" class="nav-collapse ">
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu">
-                    <li class="active">
-                        <a class="" href="index.html">
-                            <i class="icon_house_alt"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
+
                     <li class="sub-menu">
                         <a href="javascript:;" class="">
                             <i class="icon_document_alt"></i>
-                            <span>Forms</span>
+                            <span>Terrains</span>
                             <span class="menu-arrow arrow_carrot-right"></span>
                         </a>
                         <ul class="sub">
-                            <li><a class="" href="form_component.html">Form Elements</a></li>
-                            <li><a class="" href="form_validation.html">Form Validation</a></li>
+                            <li><a class="" href="{{ path("terrain_index")}}">Terrain</a></li>
+                            <li><a class="" href="{{ path("reservation_index")}}">Réservation</a></li>
                         </ul>
                     </li>
                     <li class="sub-menu">
                         <a href="javascript:;" class="">
                             <i class="icon_desktop"></i>
-                            <span>UI Fitures</span>
+                            <span>Utilisateurs</span>
                             <span class="menu-arrow arrow_carrot-right"></span>
                         </a>
                         <ul class="sub">
-                            <li><a class="" href="general.html">Elements</a></li>
-                            <li><a class="" href="buttons.html">Buttons</a></li>
-                            <li><a class="" href="grids.html">Grids</a></li>
+                            <li><a class="" href="{{ path("admin_index")}}">Admin</a></li>
+                            <li><a class="" href="{{ path("client_index")}}">Client</a></li>
+                            <li><a class="" href="{{ path("adherant_index")}}">Adherant</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a class="" href="widgets.html">
+                    <li class="sub-menu">
+                        <a class="" href="javascript:;">
                             <i class="icon_genius"></i>
-                            <span>Widgets</span>
+                            <span>Match Making</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
                         </a>
+                        <ul class="sub">
+                            <li><a class="" href="{{ path("equipe_index")}}">Equipes</a></li>
+                            <li><a class="" href="{{ path("demande_index")}}">Demande</a></li>
+
+                        </ul>
+
                     </li>
                     <li class="sub-menu">
                         <a class="" href="javascript:;">
@@ -377,27 +384,33 @@
                     <li class="sub-menu">
                         <a href="javascript:;" class="">
                             <i class="icon_table"></i>
-                            <span>Tables</span>
+                            <span>Events</span>
                             <span class="menu-arrow arrow_carrot-right"></span>
                         </a>
                         <ul class="sub">
-                            <li><a class="" href="basic_table.html">Basic Table</a></li>
+                            <li><a class="" href="{{ path("event_index")}}">event</a></li>
+                            <li><a class="" href="{{ path("promotion_index")}}">promotion</a></li>
                         </ul>
                     </li>
 
                     <li class="sub-menu">
                         <a href="javascript:;" class="">
                             <i class="icon_documents_alt"></i>
-                            <span>Pages</span>
+                            <span>Clubs</span>
                             <span class="menu-arrow arrow_carrot-right"></span>
                         </a>
                         <ul class="sub">
-                            <li><a class="" href="profile.html">Profile</a></li>
-                            <li><a class="" href="login.html"><span>Login Page</span></a></li>
-                            <li><a class="" href="contact.html"><span>Contact Page</span></a></li>
-                            <li><a class="" href="blank.html">Blank Page</a></li>
-                            <li><a class="" href="404.html">404 Error</a></li>
+                            <li><a class="" href="{{ path("joueurs_index")}}">Joueurs</a></li>
+                            <li><a class="" href="{{ path("competition_index")}}"><span>Competition</span></a></li>
+                            <li><a class="" href="{{ path("club_index")}}"><span>Club</span></a></li>
+
                         </ul>
+                    </li>
+                    <li class="active">
+                        <a class="" href="{{ path("app_login")}}">
+                            <i class="icon_house_alt"></i>
+                            <span>Déconnexion</span>
+                        </a>
                     </li>
 
                 </ul>
@@ -490,6 +503,39 @@
     <script src="{{asset('jsBack/sparklines.js')}}"></script>
     <script src="{{asset('jsBack/charts.js')}}"></script>
     <script src="{{asset('jsBack/jquery.slimscroll.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            var calendarEl = document.getElementById('calendar-holder');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                defaultView: 'dayGridMonth',
+                editable: true,
+                eventSources: [
+                    {
+                        url: "/fc-load-events",
+                        method: "POST",
+                        extraParams: {
+                            filters: JSON.stringify({})
+                        },
+                        failure: () => {
+                            // alert("There was an error while fetching FullCalendar!");
+                        },
+                    },
+                ],
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay',
+                },
+                plugins: [ 'interaction', 'dayGrid', 'timeGrid' ], // https://fullcalendar.io/docs/plugin-index
+                timeZone: 'UTC',
+            });
+            calendar.render();
+        });
+    </script>
     <script>
         //knob
         $(function() {
@@ -528,6 +574,7 @@
     </script>
 
     </script>
+
 
 {% endblock %}
 </section>

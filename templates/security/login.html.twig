@@ -1,8 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Connexion {% endblock %}
+{% block header %}
+<header class="top-navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{asset('index.html')}}">
+                <center><h1 style="color: #a3d781" align="center">SurTerrain</h1></center>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-host" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div></nav></header>
+
+{% endblock %}
 
 {% block body %}
+<div class="container">
+<div class="section-title text-center " >
+
 <form method="post">
     {% for message in app.flashes('message')  %}
 
@@ -59,15 +77,18 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
+    <button class="btn btn-lg btn-success" type="submit">
         Connexion
     </button> <br> <br> <br>
 
     <div class="mb-3">
-        <a href="register" > Creer Un compte</a>
+        <a href="register" class="btn btn-lg btn-primary" > Creer Un compte</a>
     </div>
 
 
 
 </form>
+    </div>
+    </div>
+</div>
 {% endblock %}

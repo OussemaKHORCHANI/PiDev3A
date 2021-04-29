@@ -105,7 +105,7 @@ class ClientAuthentificatorAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetPath);
         }
         if( in_array('ROLE_CLIENT', $rolesTab, true)) {
-            return new RedirectResponse($this->urlGenerator->generate('client_index'));
+            return new RedirectResponse($this->urlGenerator->generate('reservation_new'));
         }elseif (in_array('ROLE_ADMIN', $rolesTab, true))
         {
             return new RedirectResponse($this->urlGenerator->generate('admin_index'));

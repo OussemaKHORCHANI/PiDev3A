@@ -47,4 +47,14 @@ class TerrainRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function countEtat()
+    {
+
+        $qb = $this->createQueryBuilder('v')
+            ->select('COUNT(v.idterrain) AS stade, SUBSTRING(v.etat, 1, 10) AS e')
+            ->groupBy('e');
+        return $qb->getQuery()
+            ->getResult();
+
+    }
 }

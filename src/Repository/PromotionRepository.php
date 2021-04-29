@@ -56,4 +56,14 @@ class PromotionRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function find_Nb_Rec_Par_Status($status){
+
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT DISTINCT  count(r.idPromo) FROM   App\Entity\Promotion r  where r.pourcentage <= :status   '
+        );
+        $query->setParameter('status', $status);
+        return $query->getResult();
+    }
 }

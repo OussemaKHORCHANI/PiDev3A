@@ -2,7 +2,14 @@
 
 {% block title %}Event{% endblock %}
 
-{% block body %}
+{% block head %}
+<section id="main-content">
+    <section class="wrapper">
+        <!--overview start-->
+        <div class="row">
+            <div class="col-lg-12">
+                {% endblock %}
+                {% block showterrain %}
     <h1>Event</h1>
 
     <table class="table">
@@ -37,9 +44,10 @@
         </tbody>
     </table>
 
-    <a href="{{ path('event_index') }}">back to list</a>
+    <a href="{{ path('event_index') }}" class="btn btn-primary">back to list</a>
 
-    <a href="{{ path('event_edit', {'id': event.id}) }}">edit</a>
+    <a href="{{ path('event_edit', {'id': event.id}) }}" class="btn btn-success">edit</a>
 
     {{ include('event/_delete_form.html.twig') }}
+            </div></div></section></section>
 {% endblock %}

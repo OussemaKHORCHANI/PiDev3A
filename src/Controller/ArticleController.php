@@ -183,7 +183,7 @@ class ArticleController extends AbstractController
         $servername = "localhost";//Server Name
         $username = "root";//Server User Name
         $password = "";//Server Password
-        $dbname = "c";//Database Name
+        $dbname = "surterrain";//Database Name
         ////Create DB Connection
         $conn = mysqli_connect($servername, $username, $password, $dbname);
 

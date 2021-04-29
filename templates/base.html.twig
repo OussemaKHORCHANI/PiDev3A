@@ -27,7 +27,7 @@
 
 </head>
 <body class="host_version">
-{% block modal %}
+{#  {% block modal %}
     <!-- Modal -->
     <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -104,7 +104,7 @@
             </div>
         </div>
     </div>
-{% endblock %}
+{% endblock %}#}
 {% block loader %}
     <!-- LOADER -->
     <div id="preloader">
@@ -132,18 +132,18 @@
                 <div class="collapse navbar-collapse" id="navbars-host">
                     <ul class="navbar-nav ml-auto">
 
-                        <li class="nav-item "><a class="nav-link" href="{{asset('index.html')}}">Terrain</a></li>
+                        <li class="nav-item "><a class="nav-link" href="{{path('reservation_new')}}">Terrain</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{asset('features.html')}}">Making Match </a></li>
 
-                        <li class="nav-item active"><a class="nav-link" href="{{asset('domain.html')}}">Store</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="{{asset('listarticlefront')}}">Store</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{asset('pricing.html')}}">Event</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{asset('contact.html')}}">Club</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{asset('about.html')}}">Compte</a></li>
 
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
+                        <li class="nav-item"><a class="nav-link" href="{{path('app_login')}}">Se déconnecter</a></li>
+                        </ul>
+                    {#  <ul class="nav navbar-nav navbar-right">
                         <li><a class="hover-btn-new log" href="#" data-toggle="modal" data-target="#login"><span>Se connecter</span></a></li>
-                    </ul>
+                    </ul>#}
                 </div>
             </div>
         </nav>

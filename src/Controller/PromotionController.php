@@ -92,7 +92,36 @@ class PromotionController extends AbstractController
 
         return $this->redirectToRoute('promotion_index');
     }
+    /**
+     * @Route("/r/promotion_stat", name="promotion_stat", methods={"GET"})
+     */
+    public function reclamation_stat(PromotionRepository $PromotionRepository): Response
+    {
+        $nbrs[]=Array();
 
+        $e1=$PromotionRepository->find_Nb_Rec_Par_Status("20");
+        dump($e1);
+        $nbrs[]=$e1[0][1];
+        $e2=$PromotionRepository->find_Nb_Rec_Par_Status("40");
+        dump($e2);
+        $nbrs[]=$e2[0][1];
+
+        dump($nbrs);
+        reset($nbrs);
+        dump(reset($nbrs));
+        $key = key($nbrs);
+        dump($key);
+        dump($nbrs[$key]);
+
+        unset($nbrs[$key]);
+
+        $nbrss=array_values($nbrs);
+        dump(json_encode($nbrss));
+
+        return $this->render('promotion/stat.html.twig', [
+            'nbr' => json_encode($nbrss),
+        ]);
+    }
 
 
 }

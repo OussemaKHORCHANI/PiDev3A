@@ -2,7 +2,14 @@
 
 {% block title %}Joueurs{% endblock %}
 
-{% block body %}
+{% block head %}
+<section id="main-content">
+    <section class="wrapper">
+        <!--overview start-->
+        <div class="row">
+            <div class="col-lg-12">
+                {% endblock %}
+                {% block showterrain %}
     <h1>Joueur: {{ joueur.nom }} {{ joueur.prenom }}</h1>
 
     <table class="table">
@@ -30,9 +37,10 @@
         </tbody>
     </table>
 
-    <a href="{{ path('joueurs_index') }}"><button class="btn">{{ button_label|default('Back to list!') }}</button></a>
+    <a href="{{ path('joueurs_index') }}"><button class="btn btn-primary">{{ button_label|default('Back to list!') }}</button></a>
 
-    <a href="{{ path('joueurs_edit', {'id': joueur.id}) }}"> <button class="btn">Edit</button></a>
+    <a href="{{ path('joueurs_edit', {'id': joueur.id}) }}"> <button class="btn btn-success">Edit</button></a>
 
     {{ include('joueurs/_delete_form.html.twig') }}
+            </div></div></section></section>
 {% endblock %}
