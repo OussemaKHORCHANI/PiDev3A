@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+ {% block descarticle %}
+     <center>
+<div class="container">
+    <div class="pricing-table">
+        <img src={{ article.imageArticle}} alt={{   article.libelle }}>
+       <li> <p class="content">
+          <h2> <strong>        {{   article.categorie }}
+           </strong></h2>
+        </p> </li>
+
+        <p class="content">
+       {{  article.libelle }}
+        <h2><b> <div class="offers_price text-primary">Prix:{{ article.prix  }}<span> DT</span></div></b></h2>
+        </p>
+
+</div>
+     </center>
+
+ {% endblock %}

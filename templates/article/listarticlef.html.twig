@@ -1,0 +1,123 @@
+{% extends 'base.html.twig' %}
+ {% block listarticle %}
+     <div width="200%">
+         <form method="post" id="contactForm" action="{{ path('rechercheart') }}" id="search_form_1" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
+             <div class="search_item">
+                 <div style='align-content: center'>
+
+                     <div class="col-md-8 col-sm-8">
+                         <table>
+
+                             <th>
+
+                         prix d'entrée 1 :
+                         <input type="number" placeholder="Search1..." required="" name="search1">
+                                 </th>
+                                 <th>
+                         prix d'entrée 2 :
+                         <input type="number" placeholder="Search2..." required="" name="search2">
+                                 </th>
+                                 <th>
+                         <input type="submit" value="Search"  class="btn btn-success">
+                                 </th>
+
+
+                         </table>
+                     </div>
+                 </div>
+             </div>
+         </form>
+         {#  <form  method="post" action="{{ path('search') }}">
+                        <input type="text" placeholder="Search..." required="" name="search">
+                        <input type="submit" value="Search">
+                       </form>#}
+     </div><!--//end-search-box-->
+     <br><br><br>   <br>
+     <div class="row offers_items">
+
+
+         {% set count = 0 %}
+         <tbody id="myTable">
+         {% set count = count+1 %}
+         <!------------------------------Affichage des articles starts here---------------------------------------->
+         {% for c in list %}
+             <!-- Offers Item -->
+             <div class="col-lg-6 offers_col">
+                 <div class="pricing-table" style="color: #2A3542" >
+
+                     <div class="row">
+                         <div class="col-lg-6">
+                             <div class="offers_image_container">
+                                 <img class="card-img-top" src={{ c.imageArticle}}   style="height:300px;Width:300px">
+                             </div>
+                         </div>
+
+                         <div class="col-lg-6">
+                             <div class="offers_content">
+                              <h3> <b> <div class="offers_price">  {{ c.libelle}}<span></span></div></b></h3>
+                                <br>
+                                 <div class="offers_price">  {{ c.categorie}}<span></span></div>
+
+                                <h2><b> <div class="offers_price text-primary">{{ c.prix  }}<span> DT</span></div></b></h2>
+
+                                {# <div class="form-group" action="{{ path('updatearticle',{'id_article':c.id_article}) }}" method="post">
+                                     <div class="col-lg-offset-2 col-lg-10">
+                                         <div class="rateyo" id= "rating"
+                                              data-rateyo-rating="4"
+                                              data-rateyo-num-stars="5"
+                                              data-rateyo-score="3">
+                                         </div>
+
+
+                                         <span class='result'>0</span>
+                                         <input type="hidden" name="rating">
+                                     </div>
+
+                                 </div>
+                                 <button type="submit" ><a href="{{ path("updateRate",{'id_article':c.id_article}) }}"></a>
+                                     Note
+                                 </button> #}
+                                 <form action="{{ path("updateRate",{'id_article':c.id_article}) }}" method="post">
+                                     <div class="col-lg-offset-2 col-lg-10">
+
+
+
+
+                                     <div class="rateyo" id= "rating"
+                                          data-rateyo-rating="4"
+                                          data-rateyo-num-stars="5"
+                                          data-rateyo-score="3">
+                                     </div>
+
+                                     <span class='result'>0</span>
+                                     <input type="hidden" name="rating">
+
+                             </div>
+
+                             <div><input type="submit" name="add"> </div>
+
+
+                             </form>
+                                 <p class="offers_text"></p>
+
+
+
+                                  <div class="price-value">  <a href="{{ path("show",{'id_article':c.id_article}) }}" class="btn btn-primary" >En savoir plus</a></div>
+
+                                 {% set count = count+1 %}
+
+                             </div>
+                         </div>
+                     </div>
+                 </div><br><br>
+             </div>
+
+         {% endfor %}
+         <div class="navigation" style="margin-left:2%">
+             {{ knp_pagination_render(list) }}
+         </div>
+         </tbody>
+         <!--------------------------------Affichage des plats ends here---------------------------------------->
+
+</div>
+ {% endblock %}

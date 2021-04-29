@@ -1,0 +1,139 @@
+{% extends 'base2.html.twig' %}
+ {% block head %}
+
+
+<!--main content start-->
+<section id="main-content">
+    <section class="wrapper">
+        <!--overview start-->
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="icon_bag_alt"></i> Gestion Categorie</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+                    <li><i class="fa fa-shopping-bag"></i>Categorie</li>
+                </ol>
+            </div>
+        </div>
+        {% endblock %}
+{% block formcat %}
+<!-- Today status end -->
+
+
+
+<div class="row">
+   {#  <table>
+        <tr>
+            <td>
+                 <div class="search-box"  style="width: 50% ; display: table-row" >
+
+        <form  method="post" action="{{ path('searchcat') }}">
+            <input class="form-control"  type="text" placeholder="Search..." required="" name="search">
+            <button type="submit" value="Search">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+            </button>
+           {# <input class="btn btn-outline-primary" type="submit" value="Search" >
+        </form>
+        </div>
+
+        </tr>
+    </table>#}
+
+    </div><!--//end-search-box-->
+    <div class="col-lg-9 col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2><i class="fa fa-shopping-bag"></i><strong>Categorie</strong></h2>
+              <div class="panel-actions" style="outline-color: #89bbd8">
+                <button class="btn btn-outline-primary" type="submit"><a href="{{ path("addCategorie") }}" style="atsc-nav-left: "> Ajouter une catégorie </a></button>
+              </div>
+
+            </div>
+
+            <div class="panel-body">
+
+                <table class="table bootstrap-datatable countries">
+                    <thead>
+                    <tr>
+                        <th>Désignation </th>
+                        <th>Nom Catégorie</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr {% for c in list %}>
+                        <td>{{ c.idcat}}</td>
+                        <td>{{ c.nomcat}}</td>
+
+
+
+                        <td>
+                            <li>
+                                <a class="" href="{{ path("deletecateg",{'idcat':c.idcat}) }}">
+                                    <i class="icon_minus-06"style="height:100px; margin-top:100px;"></i>
+
+
+                                </a>
+
+                            </li>
+
+                        </td>
+                        <td>
+                            <li>
+                                <a  class="" href="{{ path("updatecateg",{'idcat':c.idcat}) }}">
+                                    <i class="icon_pencil-edit"style="height:100px; margin-top:100px;"></i>
+
+
+                                </a>
+
+                            </li>
+
+                        </td>
+
+                    </tr {% endfor %}>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+    <table><tr>
+            <td>
+                <form  action="{{ path('listcat') }}">
+                    <button>
+                        <i class="icon_refresh"></i>
+
+                    </button>
+                </form>
+                <div class="clearfix"> </div>
+
+            </td>
+            <td>
+                <form  action="{{ path('tricat') }}">
+                    <button>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-sort-down-alt" viewBox="0 0 16 16" >
+                            <path d="M3.5 3.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 12.293V3.5zm4 .5a.5.5 0 0 1 0-1h1a.5.5 0 0 1 0 1h-1zm0 3a.5.5 0 0 1 0-1h3a.5.5 0 0 1 0 1h-3zm0 3a.5.5 0 0 1 0-1h5a.5.5 0 0 1 0 1h-5zM7 12.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7a.5.5 0 0 0-.5.5z"/>
+                        </svg>
+                    </button>
+                </form>
+                <div class="clearfix"> </div>
+
+            </td>
+        </tr>
+    </table>
+
+
+
+
+    <html>
+
+
+    <head></head>
+    <body>
+
+{% endblock formcat %}
