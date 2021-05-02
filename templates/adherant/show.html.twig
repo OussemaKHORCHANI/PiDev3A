@@ -1,8 +1,14 @@
 {% extends 'base2.html.twig' %}
 
 {% block title %}Adherant{% endblock %}
-
-{% block body %}
+{% block head %}
+<section id="main-content">
+    <section class="wrapper">
+        <!--overview start-->
+        <div class="row">
+            <div class="col-lg-12">
+                {% endblock %}
+                {% block showterrain %}
     <h1>Adherant</h1>
 
     <table class="table">
@@ -39,4 +45,5 @@
     <a href="{{ path('adherant_edit', {'ida': adherant.ida}) }}">edit</a>
 
     {{ include('adherant/_delete_form.html.twig') }}
+            </div></div></section></section>
 {% endblock %}

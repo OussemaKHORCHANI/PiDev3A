@@ -30,6 +30,15 @@ class DemandeController extends AbstractController
         ]);
     }
     /**
+     * @Route("/listeDemande", name="demande_front", methods={"GET"})
+     */
+    public function index2(DemandeRepository $demandeRepository): Response
+    {
+        return $this->render('demande/front.html.twig', [
+            'demandes' => $demandeRepository->findAll(),
+        ]);
+    }
+    /**
      * @Route("/imprimer", name="demande_imprimer", methods={"GET"})
      */
     public function imprimer(): Response

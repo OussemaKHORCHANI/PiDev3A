@@ -16,8 +16,9 @@
                 </ol>
             </div>
         </div>
+        <form class="navbar-form">
         <input class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder=" Rechercher" aria-label="search" aria-describedby="search">
-        <a href="{{ path('pdf_index') }}">Create pdf</a>
+        <a href="{{ path('pdf_index') }}" class="btn btn-success">Create pdf</a></form>
         {% endblock %}
         {% block formullist %}
 

@@ -17,12 +17,28 @@
                 <div class="collapse navbar-collapse" id="navbars-host">
                     <ul class="navbar-nav ml-auto">
 
-                        <li class="nav-item active  "><a class="nav-link" href="{{path('reservation_new')}}">Terrain</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{asset('features.html')}}">Making Match </a></li>
+                        <li class="nav-item active "><a class="nav-link" href="{{path('reservation_new')}}">Terrain</a></li>
+                        <li class="nav-item dropdown" >
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Making Match </a>
 
-                        <li class="nav-item "><a class="nav-link" href="{{asset('listarticlefront')}}">Store</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{asset('pricing.html')}}">Event</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{asset('contact.html')}}">Club</a></li>
+                            <div class="dropdown-menu" aria-labelledby="dropdown-a">
+                                <a class="dropdown-item" href="{{path('equipe_front')}}">Equipe</a>
+                                <a class="dropdown-item" href="{{path('demande_front')}}">Demande </a>
+
+                            </div>
+                        </li>
+
+                        <li class="nav-item "><a class="nav-link" href="{{path('listarticlefront')}}">Magasin</a></li>
+                        <li class="nav-item dropdown" >
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Evènement </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdown-a">
+                                <a class="dropdown-item" href="{{path('calendar_event')}}">Calendrier </a>
+                                <a class="dropdown-item" href="{{path('promotion_front')}}">Liste des evenements </a>
+
+                            </div>
+                        </li>
+
 
                         <li class="nav-item"><a class="nav-link" href="{{path('app_login')}}">Se déconnecter</a></li>
                     </ul>

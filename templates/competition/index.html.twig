@@ -54,7 +54,7 @@
                 <td>{{ competition.dateFin ? competition.dateFin|date('Y-m-d') : '' }}</td>
                 <td>
                     <a href="{{ path('competition_show', {'idCompetition': competition.idCompetition}) }}"  class="btn btn-primary">Show </a>
-                    <a>/</a>
+
                     <a href="{{ path('competition_edit', {'idCompetition': competition.idCompetition}) }}"  class="btn btn-success"> Edit</a>
                 </td>
             </tr>

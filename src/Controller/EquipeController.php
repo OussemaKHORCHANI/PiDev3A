@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Equipe;
 use App\Form\EquipeType;
 use App\Repository\EquipeRepository;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,6 +25,53 @@ class EquipeController extends AbstractController
         return $this->render('equipe/index.html.twig', [
             'equipes' => $equipeRepository->findAll(),
         ]);
+    }
+    /**
+     * @Route("/equipefront", name="equipe_front", methods={"GET"})
+     */
+    public function index2(EquipeRepository $equipeRepository): Response
+    {
+        return $this->render('equipe/equipe_front.html.twig', [
+            'equipes' => $equipeRepository->findAll(),
+        ]);
+    }
+    /**
+     * @Route("/imprimer", name="equipe_imprimer", methods={"GET"})
+     */
+    public function imprimer(): Response
+    {
+        // Configure Dompdf aComposer require mpdf/mpdfccording to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        $equipe = $this->getDoctrine()
+            ->getRepository(equipe::class)
+            ->findAll();
+
+
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('equipe/imprimer.html.twig', [
+            'equipes' => $equipe,
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => true
+        ]);
+
+
     }
 
     /**
@@ -95,4 +144,5 @@ class EquipeController extends AbstractController
 
         return $this->redirectToRoute('equipe_index');
     }
+
 }

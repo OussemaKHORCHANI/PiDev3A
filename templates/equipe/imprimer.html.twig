@@ -1,0 +1,34 @@
+{% block body %}
+    <h1 align="center"> Listes des demande</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+
+
+            <th> Id</th>
+            <th><</i> nom</th>
+            <th></i> Nombre</th>
+
+
+        </tr>
+        </thead>
+        <tbody id='hi'>
+        {% for equipe in equipes %}
+            <tr>
+
+                <td>{{ equipe.idequipe }}</td>
+                <td>{{ equipe.nom }}</td>
+                <td>{{ equipe.nombre }}</td>
+                <td>
+
+                </td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}

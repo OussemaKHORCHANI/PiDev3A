@@ -29,6 +29,42 @@
         <form  method="post" action="{{ path('search') }}">
 
             <input class="form-control"  type="text" placeholder="Search..." required="" name="search">
+            <button class="btn btn-outline-primary" type="submit"><a href="{{ path("addArticle") }}" style="atsc-nav-left: "> Ajouter un article </a></button>
+            <table><tr>
+                    <td>
+                        <form  action="{{ path('list') }}">
+                            <button>
+                                <i class="icon_refresh"></i>
+
+                            </button>
+                        </form>
+                        <div class="clearfix"> </div>
+
+                    </td>
+                    <td>
+                        <form  action="{{ path('triart') }}">
+                            <button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-sort-down-alt" viewBox="0 0 16 16" >
+                                    <path d="M3.5 3.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 12.293V3.5zm4 .5a.5.5 0 0 1 0-1h1a.5.5 0 0 1 0 1h-1zm0 3a.5.5 0 0 1 0-1h3a.5.5 0 0 1 0 1h-3zm0 3a.5.5 0 0 1 0-1h5a.5.5 0 0 1 0 1h-5zM7 12.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7a.5.5 0 0 0-.5.5z"/>
+                                </svg>
+                            </button>
+                        </form>
+                        <div class="clearfix"> </div>
+
+                    </td>
+                    <td>
+                        <form  action="{{ path('statistiques') }} ">
+                            <button >
+                                <i class="icon-charts-l" ></i>
+
+                            </button>
+                        </form>
+                        <div class="clearfix"> </div>
+
+                    </td>
+                </tr>
+            </table>
+
         </form>
     </div><!--//end-search-box-->
 
@@ -37,7 +73,7 @@
             <div class="panel-heading">
                 <h2><i class="fa fa-shopping-bag"></i><strong>Article</strong></h2>
               <div class="panel-actions" style="outline-color: #89bbd8">
-                <button class="btn btn-outline-primary" type="submit"><a href="{{ path("addArticle") }}" style="atsc-nav-left: "> Ajouter un article </a></button>
+
               </div>
 
             </div>
@@ -109,40 +145,6 @@
     </div>
 
 
-    <table><tr>
-            <td>
-                <form  action="{{ path('list') }}">
-                    <button>
-                        <i class="icon_refresh"></i>
-
-                    </button>
-                </form>
-                <div class="clearfix"> </div>
-
-            </td>
-            <td>
-                <form  action="{{ path('triart') }}">
-                    <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-sort-down-alt" viewBox="0 0 16 16" >
-                            <path d="M3.5 3.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 12.293V3.5zm4 .5a.5.5 0 0 1 0-1h1a.5.5 0 0 1 0 1h-1zm0 3a.5.5 0 0 1 0-1h3a.5.5 0 0 1 0 1h-3zm0 3a.5.5 0 0 1 0-1h5a.5.5 0 0 1 0 1h-5zM7 12.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7a.5.5 0 0 0-.5.5z"/>
-                        </svg>
-                    </button>
-                </form>
-                <div class="clearfix"> </div>
-
-            </td>
-            <td>
-                <form  action="{{ path('statistiques') }} ">
-                    <button >
-                        <i class="icon-charts-l" style="height: 20px;width: 20px"></i>
-
-                    </button>
-                </form>
-                <div class="clearfix"> </div>
-
-            </td>
-        </tr>
-    </table>
 
 
 

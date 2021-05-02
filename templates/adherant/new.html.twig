@@ -2,10 +2,18 @@
 
 {% block title %}New Adherant{% endblock %}
 
-{% block body %}
+{% block head %}
+<section id="main-content">
+    <section class="wrapper">
+        <!--overview start-->
+        <div class="row">
+            <div class="col-lg-12">
+                {% endblock %}
+                {% block showterrain %}
     <h1>Create new Adherant</h1>
 
     {{ include('adherant/_form.html.twig') }}
 
     <a href="{{ path('adherant_index') }}">back to list</a>
+            </div></div></section></section>
 {% endblock %}

@@ -51,9 +51,9 @@
                 <td>{{ club.nomClub }}</td>
                 <td>{{ club.nbrJoueurs }}</td>
                 <td>
-                    <a href="{{ path('club_show', {'idClub': club.idClub}) }}">Show </a>
-                    <a>/</a>
-                    <a href="{{ path('club_edit', {'idClub': club.idClub}) }}"> Edit</a>
+                    <a href="{{ path('club_show', {'idClub': club.idClub}) }}" class="btn btn-primary">Show </a>
+
+                    <a href="{{ path('club_edit', {'idClub': club.idClub}) }}" class="btn btn-success"> Edit</a>
                 </td>
             </tr>
         {% else %}
@@ -66,7 +66,7 @@
     </section>
     </div>
     </div>
-    <a href="{{ path('club_new') }}"><button class="btn">{{ button_label|default('Create New!') }}</button></a>
+    <a href="{{ path('club_new') }}"><button class="btn btn-success">{{ button_label|default('Create New!') }}</button></a>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script>

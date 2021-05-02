@@ -19,6 +19,7 @@
         "mpdf/mpdf": "^8.0",
         "phpdocumentor/reflection-docblock": "^5.2",
         "phpmailer/phpmailer": "^6.4",
+        "phpoffice/phpspreadsheet": "^1.17",
         "sensio/framework-extra-bundle": "^5.1",
         "swiftmailer/swiftmailer": "^6.0",
         "symfony/asset": "4.4.*",

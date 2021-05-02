@@ -17,7 +17,7 @@ use Endroid\QrCodeBundle\Response\QrCodeResponse;
 class MainController extends AbstractController
 {
     /**
-     * @Route("/", name="calendar", methods={"GET"})
+     * @Route("/calendar", name="calendar_event", methods={"GET"})
      */
     public function calendar(EventRepository $eventRepository): Response
     { $events = $eventRepository->findAll();

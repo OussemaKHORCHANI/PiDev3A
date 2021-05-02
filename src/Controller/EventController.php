@@ -25,6 +25,8 @@ use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Swift_Mailer;
 use Swift_Message;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 /**
  * @Route("/event")
  */
@@ -297,6 +299,59 @@ class EventController extends AbstractController
         $data = json_encode($rdvs);
 
         return $this->render('main/index.html.twig', compact('data'));
+    }
+
+
+    public function getData() :array
+    {
+        /**
+         * @var $event event[]
+         */
+        $list = [];
+        // $reclam = $this->entityManager->getRepository(Reclamation::class)->findAll();
+        $event = $this->getDoctrine()->getRepository(Event::class)->findAll();
+
+        foreach ($event as $event) {
+            $list[] = [
+                $event->getId(),
+                $event->getNom(),
+                $event->getDescription(),
+                $event->getCategoriesId(),
+                $event->getLieuEvent(),
+                $event->getDateEvent(),
+                $event->getPrix(),
+
+            ];
+        }
+        return $list;
+    }
+    /**
+     * @Route("/excel/export",  name="export")
+     */
+    public function export()
+    {
+        $spreadsheet = new Spreadsheet();
+
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->setTitle('Reclamation List');
+
+        $sheet->getCell('A1')->setValue('Id');
+        $sheet->getCell('B1')->setValue('idCategorie');
+        $sheet->getCell('C1')->setValue('Description');
+        $sheet->getCell('D1')->setValue('lieuEvent');
+        $sheet->getCell('E1')->setValue('DateEvent');
+        $sheet->getCell('F1')->setValue('prix');
+
+
+
+        // Increase row cursor after header write
+        $sheet->fromArray($this->getData(),null, 'A2', true);
+        $writer = new Xlsx($spreadsheet);
+        // $writer->save('ss.xlsx');
+        $writer->save('Reclam'.date('m-d-Y_his').'.xlsx');
+        return $this->redirectToRoute('event_index');
+
     }
 
 }

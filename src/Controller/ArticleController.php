@@ -102,7 +102,7 @@ class ArticleController extends AbstractController
         $list = $paginator->paginate(
             $alarticle,
             $request->query->getInt('page', 1),
-            8
+            6
         );
         return $this->render('article/listarticlef.html.twig', [
             'list' => $list

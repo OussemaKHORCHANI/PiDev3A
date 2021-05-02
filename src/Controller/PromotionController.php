@@ -25,6 +25,15 @@ class PromotionController extends AbstractController
             'promotions' => $promotionRepository->findAll(),
         ]);
     }
+    /**
+     * @Route("/listepromo", name="promotion_front", methods={"GET"})
+     */
+    public function index2(PromotionRepository $promotionRepository): Response
+    {
+        return $this->render('promotion/promo.html.twig', [
+            'promo' => $promotionRepository->findAll(),
+        ]);
+    }
 
     /**
      * @Route("/new", name="promotion_new", methods={"GET","POST"})
