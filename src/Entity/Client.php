@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Client
@@ -24,6 +25,7 @@ class Client implements UserInterface
      * @ORM\Column(name="idC", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      */
     private $idc;
 
@@ -32,6 +34,7 @@ class Client implements UserInterface
      *
      * @ORM\Column(name="nom", type="string", length=15, nullable=false)
      * @Assert\NotBlank(message="Nom est obligatoire")
+     * @Groups("post:read")
      */
     private $nom;
 
@@ -40,6 +43,7 @@ class Client implements UserInterface
      *
      * @ORM\Column(name="prenom", type="string", length=15, nullable=false)
      * @Assert\NotBlank(message="Prenom est obligatoire")
+     * @Groups("post:read")
      */
     private $prenom;
 
@@ -48,6 +52,7 @@ class Client implements UserInterface
      *
      * @ORM\Column(name="address", type="string", length=20, nullable=false)
      * @Assert\NotBlank(message="L'Adresse est obligatoire")
+     * @Groups("post:read")
      */
     private $address;
 
@@ -61,6 +66,7 @@ class Client implements UserInterface
      *      minMessage = "Votre numéro de tel. doit avoir {{ limit }} chiffres.",
      *      allowEmptyString = false
      * )
+     * @Groups("post:read")
      */
     private $numtelc;
 
@@ -70,6 +76,7 @@ class Client implements UserInterface
      * @ORM\Column(name="email", type="string", length=30, nullable=false)
      * @Assert\NotBlank(message="Email est obligatoire")
      * @Assert\Email(message = "Mail '{{ value }}' n'est pas Valide.")
+     * @Groups("post:read")
      */
     private $email;
 
@@ -79,13 +86,14 @@ class Client implements UserInterface
      * @ORM\Column(name="mdp", type="string", length=30, nullable=false)
      * @Assert\NotBlank(message="Mot de Passe est obligatoire")
      * @Assert\EqualTo(propertyPath="confirm_mdp",message="Votre Mot de passe doit etre le meme que vous avez confirmez")
-     *
+     * @Groups("post:read")
      *
      */
     private $mdp;
     /**
      * @Assert\NotBlank(message="Mot de Passe est obligatoire")
      * @Assert\EqualTo(propertyPath="mdp",message="Vous N'avez pas tapez le meme Mot de Passe")
+     * @Groups("post:read")
      *
      *
      */
@@ -108,7 +116,7 @@ class Client implements UserInterface
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom(?string $nom): self
     {
         $this->nom = $nom;
 
@@ -120,7 +128,7 @@ class Client implements UserInterface
         return $this->prenom;
     }
 
-    public function setPrenom(string $prenom): self
+    public function setPrenom(?string $prenom): self
     {
         $this->prenom = $prenom;
 
@@ -132,7 +140,7 @@ class Client implements UserInterface
         return $this->address;
     }
 
-    public function setAddress(string $address): self
+    public function setAddress(?string $address): self
     {
         $this->address = $address;
 
@@ -144,7 +152,7 @@ class Client implements UserInterface
         return $this->numtelc;
     }
 
-    public function setNumtelc(int $numtelc): self
+    public function setNumtelc(?int $numtelc): self
     {
         $this->numtelc = $numtelc;
 
@@ -156,7 +164,7 @@ class Client implements UserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -168,7 +176,7 @@ class Client implements UserInterface
         return $this->mdp;
     }
 
-    public function setMdp(string $mdp): self
+    public function setMdp(?string $mdp): self
     {
         $this->mdp = $mdp;
 
@@ -209,6 +217,7 @@ class Client implements UserInterface
        return (string) $this->email;
     }
 
+
     public function eraseCredentials(){}
     public function getCaptchaCode()
     {
@@ -235,6 +244,7 @@ class Client implements UserInterface
     {
         $this->reset_token = $reset_token;
     }
+
 
 
 

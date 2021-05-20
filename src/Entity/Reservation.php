@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Reservation
  *
@@ -20,6 +21,7 @@ class Reservation
      * @ORM\Column(name="idRes", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("terrain : read")
      */
     private $idres;
 
@@ -28,14 +30,14 @@ class Reservation
      *
      * @ORM\Column(name="date", type="date", nullable=false)
      * @Assert\GreaterThanOrEqual("today UTC")
+     * @Groups("terrain : read")
      */
     private $date;
 
     /**
      * @var \DateTime
-     *
      * @ORM\Column(name="heureDebut", type="time", nullable=false)
-     *
+     * @Groups("terrain : read")
      */
     private $heuredebut;
 
@@ -43,7 +45,7 @@ class Reservation
      * @var \DateTime
      *
      * @ORM\Column(name="heureFin", type="time", nullable=false)
-     *
+     *@Groups("terrain : read")
      */
     private $heurefin;
 
@@ -73,36 +75,36 @@ class Reservation
         return $this->idres;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate(): ?\DateTime
     {
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate(?\DateTime $date): self
     {
         $this->date = $date;
 
         return $this;
     }
 
-    public function getHeuredebut(): ?\DateTimeInterface
+    public function getHeuredebut(): ?\DateTime
     {
         return $this->heuredebut;
     }
 
-    public function setHeuredebut(\DateTimeInterface $heuredebut): self
+    public function setHeuredebut(?\DateTime $heuredebut): self
     {
         $this->heuredebut = $heuredebut;
 
         return $this;
     }
 
-    public function getHeurefin(): ?\DateTimeInterface
+    public function getHeurefin(): ?\DateTime
     {
         return $this->heurefin;
     }
 
-    public function setHeurefin(\DateTimeInterface $heurefin): self
+    public function setHeurefin(?\DateTime $heurefin): self
     {
         $this->heurefin = $heurefin;
 
@@ -126,7 +128,7 @@ class Reservation
         return $this->idterrain;
     }
 
-    public function setIdterrain(?Terrain $idterrain): self
+    public function setIdterrain(?Terrain $idterrain): self 
     {
         $this->idterrain = $idterrain;
 

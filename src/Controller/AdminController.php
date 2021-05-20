@@ -5,13 +5,20 @@ namespace App\Controller;
 use App\Entity\Admin;
 use App\Form\AdminType;
 use App\Repository\AdminRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Symfony\Component\Serializer\Exception\NotEncodableValueException;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * @Route("/admin")
@@ -130,6 +137,104 @@ class AdminController extends AbstractController
             "Attachment" => false
         ]);
     }
+
+
+    /**
+     * @Route("/liste/json")
+     */
+    public function liste_Json(SerializerInterface $serializer ,AdminRepository $adminRepository)
+    {
+        $admin=$adminRepository->findAll();
+
+        $data=$serializer->serialize($admin,'json' ,['groups' => 'post:read']);
+
+        $response =new Response($data,200,["content-type" =>"application/json"]);
+
+        return  $response;
+    }
+
+    /**
+     * @Route("/add/json")
+     */
+    public function new_Json(Request $request, SerializerInterface $serializer ,EntityManagerInterface $entityManager)
+    {
+
+        $admin =new Admin();
+        // $content = $request->getContent();
+        try {
+            $admin->setNom($request->get("nom"));
+            $admin->setPrenom($request->get("prenom"));
+            $admin->setUsername($request->get("username"));
+            $admin->setEmail($request->get("email"));
+            $admin->setMdp($request->get("mdp"));
+
+            $entityManager->persist($admin);
+            $entityManager->flush();
+            $data= $serializer->normalize($admin,'json',['groups' => 'post:read']);
+            return new Response("Admin ajouté avec succés".json_encode($admin) );
+            //return $this->json('terrain ajouté avec succés!' ,201,['groups' => 'terrain']);
+
+        }catch (NotEncodableValueException $e ){
+            return $this->json(['status'=>400,'message'=> $e->getMessage()]);
+        }
+
+    }
+    /**
+     * @Route("/update/json",methods={"POST","GET"})
+     */
+    public function update_Json(Request $request, NormalizerInterface $serializer ,EntityManagerInterface $entityManager)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $admin=$entityManager->getRepository(Admin::class)->find($request->get("id"));
+
+        $admin->setNom($request->get("nom"));
+        $admin->setPrenom($request->get("prenom"));
+        $admin->setUsername($request->get("username"));
+        $admin->setEmail($request->get("email"));
+
+        $entityManager->flush();
+        $data= $serializer->normalize($admin,'json',['groups' => 'post:read']);
+        return new Response("Admin modifié avec succés".json_encode($data) );
+    }
+    /**
+     * @Route("/delete/json")
+     */
+    public function delete_Json(Request $request, SerializerInterface $serializer ,EntityManagerInterface $entityManager)
+    {
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $admin=$this->getDoctrine()->getManager()->getRepository(Admin::class)->find($request->get("id"));
+        if($admin!=null){
+            $entityManager->remove($admin);
+            $entityManager->flush();
+            $serialize = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serialize->normalize("Admin supprimé !");
+            return new JsonResponse($formatted);
+        }
+        return new JsonResponse("id du Admin invalide !");
+
+
+    }
+
+    /**
+     * @Route("admin/getPasswordByEmail", name="app_password")
+     */
+
+    public function getPassswordByEmail(Request $request) {
+
+        $email = $request->get('email');
+        $user = $this->getDoctrine()->getManager()->getRepository(Admin::class)->findOneBy(['email'=>$email]);
+        if($user) {
+            $password = $user->getPassword();
+            $serializer = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serializer->normalize($password);
+            return new JsonResponse($formatted);
+        }
+        return new Response("user not found");
+
+    }
+
+
 
 
 }

@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Admin
@@ -21,6 +22,7 @@ class Admin implements UserInterface
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      */
     private $id;
 
@@ -29,6 +31,7 @@ class Admin implements UserInterface
      *
      * @ORM\Column(name="nom", type="string", length=15, nullable=false)
      * @Assert\NotBlank(message="Nom est obligatoire")
+     * @Groups("post:read")
      */
     private $nom;
 
@@ -37,6 +40,7 @@ class Admin implements UserInterface
      *
      * @ORM\Column(name="prenom", type="string", length=15, nullable=false)
      * @Assert\NotBlank(message="Prenom est obligatoire")
+     * @Groups("post:read")
      */
     private $prenom;
 
@@ -45,6 +49,7 @@ class Admin implements UserInterface
      *
      * @ORM\Column(name="username", type="string", length=15, nullable=false)
      * @Assert\NotBlank(message="Username is required")
+     * @Groups("post:read")
      *
      */
     private $username;
@@ -55,6 +60,7 @@ class Admin implements UserInterface
      * @ORM\Column(name="email", type="string", length=30, nullable=false)
      * @Assert\NotBlank(message="Email est obligatoire")
      * @Assert\Email(message = "The email '{{ value }}' is not a valid email.")
+     * @Groups("post:read")
      */
     private $email;
 
@@ -63,12 +69,14 @@ class Admin implements UserInterface
      *
      * @ORM\Column(name="mdp", type="string", length=30, nullable=false)
      * @Assert\NotBlank(message="Mot de Passe est obligatoire")
+     * @Groups("post:read")
      */
     private $mdp;
 
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups("post:read")
      */
     private $reset_token;
 
@@ -82,7 +90,7 @@ class Admin implements UserInterface
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom(?string $nom): self
     {
         $this->nom = $nom;
 
@@ -94,7 +102,7 @@ class Admin implements UserInterface
         return $this->prenom;
     }
 
-    public function setPrenom(string $prenom): self
+    public function setPrenom(?string $prenom): self
     {
         $this->prenom = $prenom;
 
@@ -106,7 +114,7 @@ class Admin implements UserInterface
         return $this->username;
     }
 
-    public function setUsername(string $username): self
+    public function setUsername(?string $username): self
     {
         $this->username = $username;
 
@@ -118,7 +126,7 @@ class Admin implements UserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -130,7 +138,7 @@ class Admin implements UserInterface
         return $this->mdp;
     }
 
-    public function setMdp(string $mdp): self
+    public function setMdp(?string $mdp): self
     {
         $this->mdp = $mdp;
 
