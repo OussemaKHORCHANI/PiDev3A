@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Joueurs
@@ -20,6 +21,7 @@ class Joueurs
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      */
     private $id;
 
@@ -37,6 +39,7 @@ class Joueurs
      *      maxMessage = "Le nom ne doit pas dépasser {{ limit }} caractères"
      *
      * )
+     * @Groups("post:read")
      */
     private $nom;
 
@@ -54,6 +57,7 @@ class Joueurs
      *      maxMessage = "Le prenom ne doit pas dépasser {{ limit }} caractères"
      *
      * )
+     * @Groups("post:read")
      */
     private $prenom;
 
@@ -72,6 +76,7 @@ class Joueurs
      *     value = 25,
      *     message = "L'age ne doit pas dépasser 25 ans"
      * )
+     * @Groups("post:read")
      */
     private $age;
 
@@ -79,13 +84,14 @@ class Joueurs
      * @var string
      *
      * @ORM\Column(name="nom_club", type="string", length=11, nullable=true)
+     * @Groups("post:read")
      */
     private $nomClub;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=30, nullable=false)
+     * @ORM\Column(name="email", type="string", length=40, nullable=false)
      * @Assert\Email(
      *       message = "The email '{{ value }}' is not a valid email."
      * )
@@ -93,7 +99,7 @@ class Joueurs
      * (
      * message = "remplissez le champ SVP"
      * )
-     *
+     *@Groups("post:read")
      */
     private $email;
 
@@ -104,6 +110,7 @@ class Joueurs
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_club", referencedColumnName="id_club")
      * })
+     * @Groups("post:read")
      */
     private $idClub;
 

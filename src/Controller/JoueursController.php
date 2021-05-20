@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Joueurs;
 use App\Entity\Club;
+use App\Form\ClubType;
 use App\Form\JoueursType;
+use App\Repository\ClubRepository;
 use App\Repository\JoueursRepository;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -16,6 +18,11 @@ use MercurySeries\FlashyBundle\FlashyNotifier;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 /**
  * @Route("/joueurs")
@@ -29,9 +36,10 @@ class JoueursController extends AbstractController
     public function index(JoueursRepository $joueursRepository): Response
     {
         return $this->render('joueurs/index.html.twig', [
-            'joueurs' => $joueursRepository->findAll(),
-        ]);
+            'joueurs' => $joueursRepository->findAll(),]);
+
     }
+
 
     /**
      * @Route("/new", name="joueurs_new", methods={"GET","POST"})
@@ -50,11 +58,11 @@ class JoueursController extends AbstractController
             $mail = new PHPMailer(true);
             try {
 
-                  $nom = $form->get('nom')->getData();
-                  $prenom = $form->get('prenom')->getData();
-                  $age = $form->get('age')->getData();
-                  $email = $form->get('email')->getData();
-                  $idClub = $form->get('idClub')->getData();
+                $nom = $form->get('nom')->getData();
+                $prenom = $form->get('prenom')->getData();
+                $age = $form->get('age')->getData();
+                $email = $form->get('email')->getData();
+                $idClub = $form->get('idClub')->getData();
 
 
                 //Server settings
@@ -63,7 +71,7 @@ class JoueursController extends AbstractController
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
                 $mail->Username   = 'issaouihamidou@gmail.com';             // SMTP username
-                $mail->Password   = '2info2hamidou';                               // SMTP password
+                $mail->Password   = '2info2D3CGK';                               // SMTP password
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port       = 587;
 
@@ -93,8 +101,45 @@ class JoueursController extends AbstractController
         ]);
     }
 
+        /**
+         * @Route("/newjson")
+         */
+        public function newjson(Request $request,FlashyNotifier $flashy,NormalizerInterface $normalizer): Response
+    {
+
+
+        $joueur = new Joueurs();
+        $form = $this->createForm(JoueursType::class, $joueur);
+        $form->handleRequest($request);
+
+        $joueur = new joueurs();
+        $nom = $request->query->get("nom");
+        $prenom = $request->query->get("prenom");
+        $age = $request->query->get("age");
+        $email = $request->query->get("email");
+        $idClub=$request->query->get("idClub");
+
+
+
+        $joueur->setNom($nom);
+        $joueur->setPrenom($prenom);
+        $joueur->setAge($age);
+        $joueur->setEmail($email);
+        $joueur->setIdClub($this->getDoctrine()->getRepository(Club::class)->find($idClub));
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($joueur);
+        $entityManager->flush();
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($joueur);
+        return new JsonResponse($formatted);
+
+        }
+
+
     /**
-     * @Route("/{id}", name="joueurs_show", methods={"GET"})
+     * @Route("/jor/{id}", name="joueurs_show", methods={"GET"})
      */
     public function show(Joueurs $joueur): Response
     {
@@ -102,6 +147,17 @@ class JoueursController extends AbstractController
             'joueur' => $joueur,
 
         ]);
+
+    }
+    /**
+     * @Route("/display", name="display_jr", methods={"GET"})
+     */
+    public function dispjoueur(): Response
+    {
+        $joueur=$this->getDoctrine()->getManager()->getRepository(Joueurs::class)->findAll();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted=$serializer->normalize($joueur);
+        return new JsonResponse($formatted);
     }
 
     /**
@@ -121,6 +177,7 @@ class JoueursController extends AbstractController
             'joueur' => $joueur,
             'form' => $form->createView(),
         ]);
+
     }
 
     /**
@@ -132,13 +189,36 @@ class JoueursController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($joueur);
             $entityManager->flush();
+
             $flashy->error('Joueur supprimer!');
         }
         return $this->redirectToRoute('joueurs_index');
     }
     /**
-     * @Route("/joueurs/tri", name="sortbyage",methods={"GET","POST"})
+     * @Route("/delete/json")
      */
+    public function delete_Json(Request $request)
+    {
+        $joueur = new Joueurs();
+        $id=$request->get("id");
+        $entityManager = $this->getDoctrine()->getManager();
+        $joueur=$entityManager->getRepository(Joueurs::class)->find($id);
+        if($joueur!=null){
+            $entityManager->remove($joueur);
+            $entityManager->flush();
+
+            $serialize = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serialize->normalize("joueur supprimer");
+            return new JsonResponse($formatted);
+
+        }
+        return new JsonResponse("id de reservation est invalide !");
+
+
+    }
+     /**
+      * @Route("/joueurs/tri", name="sortbyage",methods={"GET","POST"})
+      */
     public function sortByage(JoueursRepository $joueursRepository): Response
     {
 
