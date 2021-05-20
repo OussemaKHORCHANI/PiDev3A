@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Adherant
@@ -22,6 +23,7 @@ class Adherant implements UserInterface
      * @ORM\Column(name="idA", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      */
     private $ida;
 
@@ -30,6 +32,7 @@ class Adherant implements UserInterface
      *
      * @ORM\Column(name="nom", type="string", length=15, nullable=false)
      * @Assert\NotBlank(message="Nom est obligatoire")
+     * @Groups("post:read")
      */
     private $nom;
 
@@ -38,6 +41,7 @@ class Adherant implements UserInterface
      *
      * @ORM\Column(name="prenom", type="string", length=15, nullable=false)
      * @Assert\NotBlank(message="Prenom est obligatoire")
+     * @Groups("post:read")
      */
     private $prenom;
 
@@ -46,6 +50,7 @@ class Adherant implements UserInterface
      *
      * @ORM\Column(name="cin", type="integer", nullable=false)
      * @Assert\NotBlank(message="CIN est obligatoire")
+     * @Groups("post:read")
      */
     private $cin;
 
@@ -59,6 +64,7 @@ class Adherant implements UserInterface
      *      minMessage = "Votre CIN doit avoir {{ limit }} chiffres.",
      *      allowEmptyString = false
      * )
+     * @Groups("post:read")
      */
     private $address;
 
@@ -67,6 +73,7 @@ class Adherant implements UserInterface
      *
      * @ORM\Column(name="nomTerain", type="string", length=20, nullable=false)
      * @Assert\NotBlank(message="le Nom de Terrain est obligatoire")
+     * @Groups("post:read")
      */
     private $nomterain;
 
@@ -76,6 +83,7 @@ class Adherant implements UserInterface
      * @ORM\Column(name="email", type="string", length=30, nullable=false)
      * @Assert\NotBlank(message="Email est obligatoire")
      * @Assert\Email(message = "Mail '{{ value }}' n'est pas Valide.")
+     * @Groups("post:read")
      */
     private $email;
 
@@ -89,6 +97,7 @@ class Adherant implements UserInterface
      *      minMessage = "votre numéro de tel. doit avoir {{ limit }} chiffres.",
      *      allowEmptyString = false
      * )
+     * @Groups("post:read")
      */
     private $numtel;
 
@@ -97,12 +106,14 @@ class Adherant implements UserInterface
      *
      * @ORM\Column(name="mdp", type="string", length=30, nullable=false)
      * @Assert\NotBlank(message="Mot de Passe est obligatoire")
+     * @Groups("post:read")
      */
     private $mdp;
 
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups("post:read")
      */
     private $reset_token;
 
@@ -116,7 +127,7 @@ class Adherant implements UserInterface
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom(?string $nom): self
     {
         $this->nom = $nom;
 
@@ -128,7 +139,7 @@ class Adherant implements UserInterface
         return $this->prenom;
     }
 
-    public function setPrenom(string $prenom): self
+    public function setPrenom(?string $prenom): self
     {
         $this->prenom = $prenom;
 
@@ -140,7 +151,7 @@ class Adherant implements UserInterface
         return $this->cin;
     }
 
-    public function setCin(int $cin): self
+    public function setCin(?int $cin): self
     {
         $this->cin = $cin;
 
@@ -152,7 +163,7 @@ class Adherant implements UserInterface
         return $this->address;
     }
 
-    public function setAddress(string $address): self
+    public function setAddress(?string $address): self
     {
         $this->address = $address;
 
@@ -164,7 +175,7 @@ class Adherant implements UserInterface
         return $this->nomterain;
     }
 
-    public function setNomterain(string $nomterain): self
+    public function setNomterain(?string $nomterain): self
     {
         $this->nomterain = $nomterain;
 
@@ -176,7 +187,7 @@ class Adherant implements UserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -188,7 +199,7 @@ class Adherant implements UserInterface
         return $this->numtel;
     }
 
-    public function setNumtel(int $numtel): self
+    public function setNumtel(?int $numtel): self
     {
         $this->numtel = $numtel;
 
@@ -200,7 +211,7 @@ class Adherant implements UserInterface
         return $this->mdp;
     }
 
-    public function setMdp(string $mdp): self
+    public function setMdp(?string $mdp): self
     {
         $this->mdp = $mdp;
 
