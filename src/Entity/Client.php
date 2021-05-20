@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Client
@@ -24,6 +25,7 @@ class Client implements UserInterface
      * @ORM\Column(name="idC", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("terrain")
      */
     private $idc;
 
@@ -108,7 +110,7 @@ class Client implements UserInterface
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom(?string $nom): self
     {
         $this->nom = $nom;
 
@@ -120,7 +122,7 @@ class Client implements UserInterface
         return $this->prenom;
     }
 
-    public function setPrenom(string $prenom): self
+    public function setPrenom(?string $prenom): self
     {
         $this->prenom = $prenom;
 
@@ -132,7 +134,7 @@ class Client implements UserInterface
         return $this->address;
     }
 
-    public function setAddress(string $address): self
+    public function setAddress(?string $address): self
     {
         $this->address = $address;
 
@@ -144,7 +146,7 @@ class Client implements UserInterface
         return $this->numtelc;
     }
 
-    public function setNumtelc(int $numtelc): self
+    public function setNumtelc(?int $numtelc): self
     {
         $this->numtelc = $numtelc;
 
@@ -156,7 +158,7 @@ class Client implements UserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -168,13 +170,13 @@ class Client implements UserInterface
         return $this->mdp;
     }
 
-    public function setMdp(string $mdp): self
+    public function setMdp(?string $mdp): self
     {
         $this->mdp = $mdp;
 
         return $this;
     }
-    public function __toString(): string
+    public function __toString(): ?string
     {
         return $this->getNom();
     }
@@ -204,7 +206,7 @@ class Client implements UserInterface
         // TODO: Implement getSalt() method.
     }
 
-    public function getUsername() : string
+    public function getUsername() : ?string
     {
        return (string) $this->email;
     }

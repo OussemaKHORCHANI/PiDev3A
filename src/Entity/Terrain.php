@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * Terrain
  *
@@ -19,6 +19,7 @@ class Terrain
      * @ORM\Column(name="idTerrain", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("terrain : read")
      */
     private $idterrain;
 
@@ -30,6 +31,7 @@ class Terrain
      *      min = 5,
      *      minMessage = "le nom du terrain doit comporter au moins  {{ limit }} caractères")
      * @Assert\NotBlank(message="le nom de terrain est obligatoire")
+     * @Groups("terrain : read")
      */
     private $nomterrain;
 
@@ -41,6 +43,7 @@ class Terrain
      *      min = 10,
      *      minMessage = "l'adresse doit comporter au moins  {{ limit }} caractères")
      * @Assert\NotBlank(message="l'adresse de terrain est obligatoire")
+     * @Groups("terrain : read")
      */
     private $adresse;
 
@@ -49,6 +52,7 @@ class Terrain
      *
      * @ORM\Column(name="etat", type="string", length=50, nullable=false)
      * @Assert\Choice({"disponible", "réservé"})
+     * @Groups("terrain : read")
      */
     private $etat;
 
@@ -57,6 +61,7 @@ class Terrain
      *
      * @ORM\Column(name="description", type="string", length=500, nullable=true)
      *  @Assert\NotBlank(message="etat est obligatoire")
+     * @Groups("terrain : read")
      */
     private $description;
 
@@ -65,6 +70,7 @@ class Terrain
      *
      * @ORM\Column(name="photo", type="text", length=65535, nullable=true)
      * @Assert\Url
+     * @Groups("terrain : read")
      */
     private $photo;
 
@@ -78,7 +84,7 @@ class Terrain
         return $this->nomterrain;
     }
 
-    public function setNomterrain(string $nomterrain): self
+    public function setNomterrain(?string $nomterrain):self
     {
         $this->nomterrain = $nomterrain;
 
@@ -90,7 +96,7 @@ class Terrain
         return $this->adresse;
     }
 
-    public function setAdresse(string $adresse): self
+    public function setAdresse(?string $adresse): self
     {
         $this->adresse = $adresse;
 
@@ -102,7 +108,7 @@ class Terrain
         return $this->etat;
     }
 
-    public function setEtat(string $etat): self
+    public function setEtat(?string $etat): self
     {
         $this->etat = $etat;
 
@@ -114,7 +120,7 @@ class Terrain
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescription(?string $description):self
     {
         $this->description = $description;
 
@@ -133,10 +139,10 @@ class Terrain
         return $this;
     }
 
-    public function __toString(): string
-    {
-        return $this->getNomterrain();
-    }
+//    public function __toString(): string
+//    {
+//        return $this->getNomterrain();
+//    }
 
 
 }

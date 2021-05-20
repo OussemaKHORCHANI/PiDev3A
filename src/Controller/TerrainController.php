@@ -4,17 +4,25 @@ namespace App\Controller;
 
 use App\Entity\Terrain;
 use App\Form\TerrainType;
-use App\Repository\ReservationRepository;
 use App\Repository\TerrainRepository;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\BarChart;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use MercurySeries\FlashyBundle\FlashyNotifier;
-
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Symfony\Component\Serializer\Exception\NotEncodableValueException;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Routing\Annotation\Route;
+
+
+
 /**
  * @Route("/terrain")
  */
@@ -194,4 +202,85 @@ class TerrainController extends AbstractController
 
 
     }
+    /**
+     * @Route("/liste/json", name="liste_json")
+     */
+    public function liste_Json(SerializerInterface $serializer ,TerrainRepository $terrainRepository)
+    {
+        $terrain=$terrainRepository->findAll();
+
+         $data=$serializer->serialize($terrain,'json' ,['groups' => 'terrain']);
+
+         $response =new Response($data,200,["content-type" =>"application/json"]);
+
+            return  $response;
+    }
+
+    /**
+     * @Route("/add/json", name="new_json" )
+     */
+    public function new_Json(Request $request, SerializerInterface $serializer ,EntityManagerInterface $entityManager)
+    {
+
+        $terrain =new Terrain();
+       // $content = $request->getContent();
+        try {
+        $terrain->setNomterrain($request->get("nomterrain"));
+        $terrain->setAdresse($request->get("adresse"));
+        $terrain->setEtat($request->get("etat"));
+        $terrain->setDescription($request->get("description"));
+        $terrain->setPhoto($request->get("photo"));
+        
+        $entityManager->persist($terrain);
+        $entityManager->flush();
+        $data= $serializer->normalize($terrain,'json',['groups' => 'terrain']);
+        return new Response("terraain ajouté avec succés".json_encode($terrain) );
+        //return $this->json('terrain ajouté avec succés!' ,201,['groups' => 'terrain']);
+
+        }catch (NotEncodableValueException $e ){
+            return $this->json(['status'=>400,'message'=> $e->getMessage()]);
+        }
+
+    }
+    /**
+     * @Route("/update/json", name="update_json",methods={"POST","GET"})
+     */
+    public function update_Json(Request $request, NormalizerInterface $serializer ,EntityManagerInterface $entityManager)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $terrain=$entityManager->getRepository(Terrain::class)->find($request->get("idterrain"));
+
+        $terrain->setNomterrain($request->get("nomterrain"));
+        $terrain->setAdresse($request->get("adresse"));
+        $terrain->setEtat($request->get("etat"));
+        $terrain->setDescription($request->get("description"));
+        $terrain->setPhoto($request->get("photo"));
+        $entityManager->flush();
+        $data= $serializer->normalize($terrain,'json',['groups' => 'terrain']);
+        return new Response("terraain modifié avec succés".json_encode($data) );
+    }
+    /**
+     * @Route("/delete/json", name="delete_json" )
+     */
+    public function delete_Json(Request $request, SerializerInterface $serializer ,EntityManagerInterface $entityManager)
+    {
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $terrain=$this->getDoctrine()->getManager()->getRepository(Terrain::class)->find($request->get("idterrain"));
+        if($terrain!=null){
+            $entityManager->remove($terrain);
+            $entityManager->flush();
+//            $serializer->deserialize($terrain, Terrain::class,'json');
+//            return $this->json('json' ,201,['groups' => 'terrain']);
+            $serialize = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serialize->normalize("terrain  supprimé !");
+            return new JsonResponse($formatted);
+        }
+        return new JsonResponse("id du terrain invalide !");
+
+
+    }
+
+
+
 }
