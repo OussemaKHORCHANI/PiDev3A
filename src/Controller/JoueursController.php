@@ -107,7 +107,7 @@ class JoueursController extends AbstractController
         public function newjson(Request $request,FlashyNotifier $flashy,NormalizerInterface $normalizer): Response
     {
 
-
+/////commit
         $joueur = new Joueurs();
         $form = $this->createForm(JoueursType::class, $joueur);
         $form->handleRequest($request);
